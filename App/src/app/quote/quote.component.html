@@ -1,11 +1,11 @@
-<div>
-  <!-- Quote code: {{quoteData.meta.code}} -->
-  <!-- Quote code: {{quoteData.address.road}} -->
-  <h5> Shipping of following package: </h5>
-  <h5>weight - {{quoteData.data.rates[0].charge_weight.value}} {{quoteData.data.rates[0].charge_weight.unit}}</h5>
-  <h5>from: your address above</h5> 
-  <h5>to: Essen, Germany</h5> 
-  <h5>would cost: {{quoteData.data.rates[0].total_charge.amount}} {{quoteData.data.rates[0].total_charge.currency}}</h5> 
-  <h5>Shipping Company: {{quoteData.data.rates[0].shipper_account.slug}}</h5>
-  <h5>Service type: {{quoteData.data.rates[0].service_name}}</h5>
+<h5> Here are some shipping options for following package: </h5>
+<h6>weight: {{quoteData.data.rates[0].charge_weight.value}} {{quoteData.data.rates[0].charge_weight.unit}}</h6>
+<h6>from: your address above</h6> 
+<h6>to: Essen, Germany</h6> 
+
+<div *ngFor="let shipment of quoteData.data.rates">
+  <h5>{{shipment.total_charge.amount}} {{shipment.total_charge.currency}} /
+  by: {{shipment.shipper_account.slug}} /
+  via: {{shipment.service_name}}
+  </h5> 
 </div>
