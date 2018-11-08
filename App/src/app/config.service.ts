@@ -48,9 +48,6 @@ export class ConfigService {
       )
     })  
   }
-  // Observable.create(observer => {
-  //   this.http.get('https://restcountries.eu/rest/v2/name/spain')
-  // })
 
    getQuote(): Observable<any> {
 
@@ -110,7 +107,7 @@ export class ConfigService {
                         "contact_name": "Someone in BCN",
                         "street1": `${addressData.address.road}`,
                         "city": `${addressData.address.city}`,
-                        "state": "Catalonia",
+                        "state": `${addressData.address.country}`,
                         "country": `${countryData[0].cioc}`,
                         // https://restcountries.eu/rest/v2/name/germany
                         "postal_code": `${addressData.address.postcode}`
