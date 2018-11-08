@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Address } from './Address';
 import { Observable } from 'rxjs';
 import { AppComponent } from './app.component'
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -11,7 +12,6 @@ import { AppComponent } from './app.component'
 export class ConfigService {
   
   private pos = {lat: 0, lon: 0};
-  // private url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${this.pos.lat}&lon=${this.pos.lon}`
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +28,6 @@ export class ConfigService {
 
     navigator.geolocation.getCurrentPosition((data)=> 
       {
-        // console.log('get location run');
         this.pos.lat = data.coords.latitude; 
         this.pos.lon = data.coords.longitude
       }, error, options);
@@ -48,6 +47,98 @@ export class ConfigService {
         }
       )
     })  
+  }
+
+   getQuote(): Observable<any> {
+
+    return Observable.create(observer => {
+      this.getAddress().subscribe(addressData => {
+        observer.next(
+          // addressData
+            // this.http.get<Address>(
+            //   `https://nominatim.openstreetmap.org/reverse?format=json&lat=41.394946&lon=2.1976678`
+
+              this.http.post(
+                `https://sandbox-api.postmen.com/v3/rates`,
+
+                {
+                  "async": false,
+                  "shipper_accounts": [
+                    
+                    {
+                      "id": "a2b8a970-6fe5-4491-b9e2-8e3a6d17cd08"
+                    }
+                  ],
+                  "shipment": {
+                    "parcels": [
+                      {
+                        "description": "Food XS",
+                        "box_type": "custom",
+                        "weight": {
+                          "value": 20,
+                          "unit": "kg"
+                        },
+                        "dimension": {
+                          "width": 20,
+                          "height": 40,
+                          "depth": 40,
+                          "unit": "cm"
+                        },
+                        "items": [
+                          {
+                            "description": "Foooood Bar",
+                            "origin_country": "ESP",
+                            "quantity": 2,
+                            "price": {
+                              "amount": 3,
+                              "currency": "JPY"
+                            },
+                            "weight": {
+                              "value": 0.6,
+                              "unit": "kg"
+                            }
+                            
+                          }
+                        ]
+                      }
+                    ],
+                    "ship_from": {
+                      "contact_name": "Someone in BCN",
+                      "street1": `${addressData.address.road}`,
+                      "city": `${addressData.address.city}`,
+                      "state": "Catalonia",
+                      "country": "ESP",
+                      "postal_code": `${addressData.address.postcode}`
+                    },
+                    "ship_to": {
+                      "contact_name": "Someone in Essen",
+                      "street1": "Dorstener str. 6",
+                      "city": "Essen",
+                      "state": "NRW",
+                      "country": "DEU",
+                      "postal_code": "45143"
+                    }
+                  }
+                },
+
+                {
+                  headers: new HttpHeaders({
+                    'content-type':  'application/json',
+                    'postmen-api-key':'79346888-11a0-493c-9ff7-2633ca0bc0c9'
+                  })
+                }
+
+
+
+              ).subscribe(data=>observer.next(data))
+        )
+      })
+    
+    })
+
+
+
+
   }
 
   
