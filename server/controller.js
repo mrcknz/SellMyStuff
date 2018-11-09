@@ -18,11 +18,16 @@ const insertAd = (username, lat, lon, country, city, postcode, road, house_numbe
   )`
 }
 
+const getAllAds = () => {
+  return `SELECT * FROM ads`
+}
+
 const deleteTable = (table) => {
   return `DROP TABLE ${table}`
 }
 
 module.exports = {
+  getAllAds,
   deleteTable,
   insertAd,
   createTableAds

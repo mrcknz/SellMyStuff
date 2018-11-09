@@ -29,7 +29,10 @@ app.get('/', (req, res, next) => {
            console.log("Can not connect to the DB" + err);
        }
        client.query(
-           controller.insertAd('Max', 4.1, 2.1, 'ESP', 'Barcelona', 08005, 'Avila', 27, 'pic1.jpg', 40, 20, 10, 10), function (err, result) {
+           controller.
+           getAllAds()
+        //    insertAd('Somebody', 3.7, 2.1, 'ESP', 'Valencia', 08005, 'Carrer', 27, 'pic2.jpg', 50, 30, 20, 20)
+           , function (err, result) {
             done();
             if (err) {
                 console.log(err);
