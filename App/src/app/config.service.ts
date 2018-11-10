@@ -15,6 +15,16 @@ export class ConfigService {
 
   constructor(private http: HttpClient) { }
 
+  getAds(): Observable<any> {
+    return Observable.create(observer=> {
+      this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)})
+    })
+  };
+
+
+
+
+
   getLocation() {
     var options = {
       enableHighAccuracy: true,

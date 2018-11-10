@@ -1,0 +1,81 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  
+    <label>
+      Username:
+      <input type="text" formControlName="username">
+    </label>
+
+    <div formGroupName="itemDetails">
+      <h3>Item to sell:</h3>
+    
+      <label>
+        Description:
+        <input type="text" formControlName="description">
+      </label>
+    
+      <label>
+        Add Picture:
+        <input type="text" formControlName="pictureName">
+      </label>
+      
+    </div>
+
+    <div formGroupName="package">
+      <h3>Packaging Details:</h3>
+    
+      <label>
+        Length:
+        <input type="text" formControlName="length">cm
+      </label>
+    
+      <label>
+        Width:
+        <input type="text" formControlName="width">cm
+      </label>
+
+      <label>
+        Height:
+        <input type="text" formControlName="height">cm
+      </label>
+
+      <label>
+        Weight:
+        <input type="text" formControlName="weight">kg
+      </label>
+    
+    </div>
+
+    <div formGroupName="address">
+      <h3>Item would be shipped from:</h3>
+    
+      <label>
+        Street:
+        <input type="text" formControlName="road">
+      </label>
+    
+      <label>
+        House Number:
+        <input type="text" formControlName="house_number">
+      </label>
+      
+      <label>
+        City:
+        <input type="text" formControlName="city">
+      </label>
+    
+      <label>
+        Postal Code:
+        <input type="text" formControlName="postcode">
+      </label>
+
+      <label>
+        Country:
+        <input type="text" formControlName="country">
+      </label>
+    
+    </div>
+      
+      <button type="submit" [disabled]="!profileForm.valid">Submit the Ad</button>
+</form>
+<p>{{addressData.address.road}}</p>
+  
