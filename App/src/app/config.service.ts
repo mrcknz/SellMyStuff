@@ -16,14 +16,30 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
 
   getAds(): Observable<any> {
+    
+
     return Observable.create(observer=> {
-      this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)})
+
+      setInterval(()=> this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)}), 1000)
+
     })
+
   };
 
+  postAds(username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight): Observable<any> {
+    return Observable.create(observer=> {
+      this.http.post(`http://localhost:3000/createad`,
+        {"username": `${username}`, "description": `${description}`, "pictureName": `${pictureName}`, "lat": `${lat}`, "lon": `${lon}`, "country": `${country}`, "city": `${city}`, "postcode": `${postcode}`, "road": `${road}`, "house_number": `${house_number}`, "length": `${length}`, "width": `${width}`, "height": `${height}`, "weight": `${weight}`},
+        
+        {
+          headers: new HttpHeaders({
+            'content-type':  'application/json'
+          })
+        }
 
-
-
+      ).subscribe(res => {observer.next(res)})
+    })
+  };
 
   getLocation() {
     var options = {
