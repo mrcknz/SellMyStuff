@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Address } from './Address';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AppComponent } from './app.component'
 import { HttpHeaders } from '@angular/common/http';
 
@@ -13,15 +13,19 @@ export class ConfigService {
   
   private pos = {lat: 0, lon: 0};
 
+
   constructor(private http: HttpClient) { }
+
+  getSelected(id) {
+
+  }
+
 
   getAds(): Observable<any> {
     
 
     return Observable.create(observer=> {
-
       setInterval(()=> this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)}), 1000)
-
     })
 
   };

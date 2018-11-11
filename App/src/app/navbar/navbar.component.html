@@ -1,6 +1,10 @@
 <p>
-  NAVBAR - search - Insert Add -
-  
-      <button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
-  
+  <button routerLink="/" routerLinkActive="active">Home</button>
+
+  <label>
+      Search ads:
+      <input type="text" [formControl]="search">
+  </label>
+
+  <button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
 </p>

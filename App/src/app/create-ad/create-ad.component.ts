@@ -40,16 +40,20 @@ export class CreateAdComponent implements OnInit {
     console.warn(this.profileForm.value);
 
     this._dataService.postAds(
-      this.profileForm.value.username, this.profileForm.value.itemDetails.description, this.profileForm.value.itemDetails.pictureName, 
-      this.addressData.lat, this.addressData.lon, 
-      this.profileForm.value.address.country, this.profileForm.value.address.city, 
-      this.profileForm.value.address.postcode, this.profileForm.value.address.road, 
+      this.profileForm.value.username, 
+      this.profileForm.value.itemDetails.description, 
+      this.profileForm.value.itemDetails.pictureName, 
+      this.addressData.lat, 
+      this.addressData.lon, 
+      this.profileForm.value.address.country, 
+      this.profileForm.value.address.city, 
+      this.profileForm.value.address.postcode, 
+      this.profileForm.value.address.road, 
       this.profileForm.value.address.house_number, 
-      this.profileForm.value.package.length, 1,1,1
-      // this.profileForm.value.package.width, 
-      // this.profileForm.value.package.height, 
-      // this.profileForm.value.package.weight
-      // this.profileForm.value.username, this.profileForm.value.itemDetails.description, this.profileForm.value.itemDetails.pictureName, this.addressData.lat, this.addressData.lon, this.profileForm.value.address.country, this.profileForm.value.address.city, this.profileForm.value.address.postcode, this.profileForm.value.address.road, this.profileForm.value.address.house_number, this.profileForm.value.package.length, this.profileForm.value.package.width, this.profileForm.value.package.height, this.profileForm.value.package.weigth
+      this.profileForm.value.package.length, 
+      this.profileForm.value.package.width, 
+      this.profileForm.value.package.height, 
+      this.profileForm.value.package.weight
       )
     .subscribe(statusPostAd => {
         this.statusPostAd = statusPostAd;

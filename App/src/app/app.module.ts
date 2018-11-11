@@ -17,7 +17,9 @@ import { AdsListComponent } from './ads-list/ads-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: AdsListComponent},
-  {path: 'newad', component: CreateAdComponent}
+  {path: 'newad', component: CreateAdComponent},
+  {path: 'details/:date', component: DetailViewComponent},
+  
 ]
 
 @NgModule({
