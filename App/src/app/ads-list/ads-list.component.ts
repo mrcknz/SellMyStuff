@@ -18,7 +18,7 @@ export class AdsListComponent implements OnInit {
     this._dataService.getAds()
       .subscribe(adsData => {
         this.adsData = adsData
-      })
+    })
   }
 
 }

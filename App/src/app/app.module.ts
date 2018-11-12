@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { HttpHeaders } from '@angular/common/http';
 
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { AppComponent } from './app.component';
 import { YourAddressComponent } from './your-address/your-address.component';
 import { YourComponent } from './your/your.component';
@@ -14,6 +15,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CreateAdComponent } from './create-ad/create-ad.component';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 import { AdsListComponent } from './ads-list/ads-list.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 
 const appRoutes: Routes = [
   {path: '', component: AdsListComponent},
@@ -31,10 +36,15 @@ const appRoutes: Routes = [
     NavbarComponent,
     CreateAdComponent,
     DetailViewComponent,
-    AdsListComponent
+    AdsListComponent,
+    // FileSelectDirective
   ],
   imports: [
+    FileUploadModule,
+    CommonModule,
+    FormsModule,
     BrowserModule,
+    Ng2CloudinaryModule,
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,

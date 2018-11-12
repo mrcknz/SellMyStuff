@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ConfigService } from '../config.service';
 import { Subscriber } from 'rxjs';
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
+import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
 @Component({
@@ -10,9 +13,15 @@ import { Subscriber } from 'rxjs';
   styleUrls: ['./create-ad.component.css']
 })
 export class CreateAdComponent implements OnInit {
+
+  uploader: CloudinaryUploader = new CloudinaryUploader(
+  new CloudinaryOptions({ cloudName: 'truroer', uploadPreset: 'ynqkvkei' })
+  );
   
   public addressData = null;
   public statusPostAd;
+  public file;
+  loading: any;
 
   profileForm = new FormGroup({
     username: new FormControl(''),
@@ -35,8 +44,26 @@ export class CreateAdComponent implements OnInit {
     })
   });
 
+  upload(){
+    this.loading = true;
+    this.uploader.uploadAll();
+    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+      let res: any = JSON.parse(response);
+      console.log(res);
+      this.profileForm.patchValue({
+        itemDetails: {
+          pictureName: res.secure_url,
+        }
+      });
+
+    }
+    this.uploader.onErrorItem = function(fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+    };
+
+  }
+
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
 
     this._dataService.postAds(
@@ -76,9 +103,10 @@ export class CreateAdComponent implements OnInit {
             country: addressData.address.country
           }
         });
-      })
-
+      });
 
   }
+
+  
 
 }

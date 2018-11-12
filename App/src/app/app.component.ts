@@ -4,7 +4,6 @@ import { ViewChild } from '@angular/core';
 import { ConfigService } from './config.service';
 import { Subscriber, Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-import { MessageService } from './message.service';
 
 
 @Component({

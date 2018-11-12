@@ -17,6 +17,11 @@
         Add Picture:
         <input type="text" formControlName="pictureName">
       </label>
+
+      <label>
+        <img src={{profileForm.value.itemDetails.pictureName}} alt="Upload Picture" style="width:100px">
+        <input (change)="upload()" type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+      </label>
       
     </div>
 
@@ -74,7 +79,7 @@
       </label>
     
     </div>
-      
+    
       <button type="submit" [disabled]="!profileForm.valid">Submit the Ad</button>
       <button routerLink="/" routerLinkActive="active">Cancel</button>
       

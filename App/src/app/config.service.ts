@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders  } from '@angular/common/http';
 import { Address } from './Address';
 import { Observable, Subject } from 'rxjs';
 import { AppComponent } from './app.component'
-import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -16,19 +15,49 @@ export class ConfigService {
 
   constructor(private http: HttpClient) { }
 
-  getSelected(id) {
 
-  }
-
-
-  getAds(): Observable<any> {
-    
+  uploadFile(file): Observable<any> {
 
     return Observable.create(observer=> {
-      setInterval(()=> this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)}), 1000)
+      this.http.post(`https://api.cloudinary.com/v1_1/truroer/image/upload`, 
+      { 
+      "file": file,
+      "upload_preset": "ynqkvkei"
+      },
+
+      {
+        headers: new HttpHeaders({
+          'content-type':  'application/json'
+        })
+      }
+
+      ).subscribe(res => {observer.next(res)})
+    })
+  };
+
+  getCountryCode(country): Observable<any> {
+
+    return Observable.create(observer=> {
+      this.http.get(`https://restcountries.eu/rest/v2/name/${country}`).subscribe(res => {observer.next(res[0].alpha3Code)})
     })
 
   };
+
+  getAds(): Observable<any> {
+
+    return Observable.create(observer=> {
+      this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)})
+    })
+
+  };
+
+  getSelectedAd(): Observable<any> {
+    return Observable.create(observer=> {
+      this.http.get(`http://localhost:3000/`).subscribe(res => {observer.next(res)})
+    })
+  };
+
+
 
   postAds(username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight): Observable<any> {
     return Observable.create(observer=> {
@@ -79,11 +108,98 @@ export class ConfigService {
     })  
   }
 
-   getQuote(): Observable<any> {
+
+
+  //  getQuote(): Observable<any> {
+
+  //   return Observable.create(observer => {
+  //     this.getAddress().subscribe(addressData => {
+  //       this.http.get(`https://restcountries.eu/rest/v2/name/${addressData.address.country}`).subscribe(countryData=> { 
+  //         observer.next(
+  //           this.http.post(
+  //             `https://sandbox-api.postmen.com/v3/rates`,
+
+  //             {
+  //               "async": false,
+  //               "shipper_accounts": [
+                  
+  //                 {
+  //                   "id": "a2b8a970-6fe5-4491-b9e2-8e3a6d17cd08"
+  //                 }
+  //               ],
+  //               "shipment": {
+  //                 "parcels": [
+  //                   {
+  //                     "description": "Food XS",
+  //                     "box_type": "custom",
+  //                     "weight": {
+  //                       "value": 1,
+  //                       "unit": "kg"
+  //                     },
+  //                     "dimension": {
+  //                       "width": 20,
+  //                       "height": 40,
+  //                       "depth": 40,
+  //                       "unit": "cm"
+  //                     },
+  //                     "items": [
+  //                       {
+  //                         "description": "Foooood Bar",
+  //                         "origin_country": "ESP",
+  //                         "quantity": 1,
+  //                         "price": {
+  //                           "amount": 3,
+  //                           "currency": "JPY"
+  //                         },
+  //                         "weight": {
+  //                           "value": 1,
+  //                           "unit": "kg"
+  //                         }
+                          
+  //                       }
+  //                     ]
+  //                   }
+  //                 ],
+  //                 "ship_from": {
+  //                   "contact_name": "Someone in BCN",
+  //                   "street1": `${addressData.address.road}`,
+  //                   "city": `${addressData.address.city}`,
+  //                   "state": `${addressData.address.country}`,
+  //                   "country": `${countryData[0].cioc}`,
+  //                   "postal_code": `${addressData.address.postcode}`
+  //                 },
+  //                 "ship_to": {
+  //                   "contact_name": "Someone in Essen",
+  //                   "street1": "Dorstener str. 6",
+  //                   "city": "Essen",
+  //                   "state": "NRW",
+  //                   "country": "DEU",
+  //                   "postal_code": "45143"
+  //                 }
+  //               }
+  //             },
+
+  //             {
+  //               headers: new HttpHeaders({
+  //                 'content-type':  'application/json',
+  //                 'postmen-api-key':'79346888-11a0-493c-9ff7-2633ca0bc0c9'
+  //               })
+  //             }
+
+  //           ).subscribe(data=>observer.next(data))
+  //         )
+  //       })
+  //     })
+    
+  //   })
+
+  // }
+
+  getShipments(selectedAddData, buyerLocation): Observable<any> {
 
     return Observable.create(observer => {
       this.getAddress().subscribe(addressData => {
-        this.http.get(`https://restcountries.eu/rest/v2/name/${addressData.address.country}`).subscribe(countryData=> { 
+        this.http.get(`https://restcountries.eu/rest/v2/name/${buyerLocation.country}`).subscribe(countryData=> { 
           observer.next(
             this.http.post(
               `https://sandbox-api.postmen.com/v3/rates`,
@@ -130,20 +246,21 @@ export class ConfigService {
                     }
                   ],
                   "ship_from": {
-                    "contact_name": "Someone in BCN",
-                    "street1": `${addressData.address.road}`,
-                    "city": `${addressData.address.city}`,
-                    "state": `${addressData.address.country}`,
-                    "country": `${countryData[0].cioc}`,
-                    "postal_code": `${addressData.address.postcode}`
+                    "contact_name": `Seller in ${selectedAddData.city}, ${selectedAddData.country}`,
+                    "street1": `${selectedAddData.road}`,
+                    "city": `${selectedAddData.city}`,
+                    "state": `${selectedAddData.county}`,
+                    "country": `${selectedAddData.country}`,
+                    "postal_code": `${selectedAddData.postcode}`
                   },
+
                   "ship_to": {
-                    "contact_name": "Someone in Essen",
-                    "street1": "Dorstener str. 6",
-                    "city": "Essen",
-                    "state": "NRW",
-                    "country": "DEU",
-                    "postal_code": "45143"
+                    "contact_name": "Someone",
+                    "street1": `${buyerLocation.road}`,
+                    "city": `${buyerLocation.city}`,
+                    // "state": "NRW",
+                    "country": `${countryData[0].alpha3Code}`,
+                    "postal_code": `${buyerLocation.postcode}`
                   }
                 }
               },
