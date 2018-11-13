@@ -1,3 +1,4 @@
+// import { MaterializeModule } from "angular2-materialize";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     // FileSelectDirective
   ],
   imports: [
+    // MaterializeModule,
     FileUploadModule,
     CommonModule,
     FormsModule,

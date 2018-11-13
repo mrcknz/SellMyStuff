@@ -1,33 +1,33 @@
-<button (click)="refresh()" routerLinkActive="active">Home</button>
-<form (ngSubmit)="onSubmit()">
-  <p>
-    <label>
-      Search ads:
-      <input type="text" [formControl]="search" >
-    </label>
-  </p>
-</form>
-<button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
-  
+<div class = "nav">
+  <button class="home" (click)="refresh()" routerLinkActive="active">Home</button>
+  <form (ngSubmit)="onSubmit()"  class="search">
+    <p class="searchL">
+      <label class="searchL">
+        <input type="text" [formControl]="search" (focus)="clear()" class="searchC">
+      </label>
+    </p>
+  </form>
+  <button class="newad" routerLink="/newad" routerLinkActive="active">Create New Ad</button>
+</div>
 
-<div *ngFor="let ad of adsData">
+<div class="list" *ngFor="let ad of adsData">
   <a [routerLink]="['/details', ad.date]"  routerLinkActive="active">
-  <h5>
-    added on: {{ad.date}}, 
-    Ad By {{ad.username}}, 
-    <img src={{ad.picturename}}  alt="" style="width:100px"> 
-    about: {{ad.description}}
-    lat: {{ad.lat}}
-    lon: {{ad.lon}}
-    country: {{ad.country}}
-    city: {{ad.city}} 
-    postcode: {{ad.postcode}} 
-    postcode: {{ad.road}}
-    house nr: {{ad.house_number}}
-    length: {{ad.length}} 
-    width: {{ad.width}}
-    height: {{ad.height}}
-    weight: {{ad.weight}}
-  </h5> 
-</a>
+    <div>
+      added on: {{ad.date}}, 
+      Ad By {{ad.username}}, 
+      <img src={{ad.picturename}}  alt="" style="width:100px"> 
+      about: {{ad.description}}
+      lat: {{ad.lat}}
+      lon: {{ad.lon}}
+      country: {{ad.country}}
+      city: {{ad.city}} 
+      postcode: {{ad.postcode}} 
+      postcode: {{ad.road}}
+      house nr: {{ad.house_number}}
+      length: {{ad.length}} 
+      width: {{ad.width}}
+      height: {{ad.height}}
+      weight: {{ad.weight}}
+    </div> 
+  </a>
 </div>

@@ -14,7 +14,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class AdsListComponent implements OnInit {
   public adsData = null;
 
-  search = new FormControl('');
+  search = new FormControl('SEARCH ADS');
 
   refresh() {
     // this.router.navigate(['/'])
@@ -22,6 +22,10 @@ export class AdsListComponent implements OnInit {
     .subscribe(adsData => {
       this.adsData = adsData
     })
+    this.search.setValue('');
+  }
+
+  clear() {
     this.search.setValue('');
   }
 
