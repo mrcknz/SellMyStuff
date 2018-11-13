@@ -45,6 +45,8 @@
     
     </div>
   </form>
+
+  <button (click)="deleteAd()" routerLinkActive="active">Delete Ad</button>
   
   <h5> Here are some shipping options for following package: </h5>
   <h6>weight: {{quoteData.data.rates[0].charge_weight.value}} {{quoteData.data.rates[0].charge_weight.unit}}</h6>

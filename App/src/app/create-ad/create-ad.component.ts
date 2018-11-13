@@ -5,6 +5,7 @@ import { Subscriber } from 'rxjs';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import {Router} from "@angular/router"
 
 
 @Component({
@@ -86,16 +87,19 @@ export class CreateAdComponent implements OnInit {
       )
     .subscribe(statusPostAd => {
         this.statusPostAd = statusPostAd;
+        if (this.statusPostAd.command === 'INSERT') {
+          this.router.navigate(['/details', this.date])
+        }
     })
     
   }
 
-  constructor(private _dataService: ConfigService) { }
+  constructor(private _dataService: ConfigService, private router: Router) { }
 
   ngOnInit() {
     let date = Date.now();
     this.date = date;
-    
+
     this._dataService.getAddress()
       .subscribe(addressData => {
         this.addressData = addressData;

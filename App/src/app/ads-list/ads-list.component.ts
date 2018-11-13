@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ConfigService } from '../config.service';
 import { Subscriber } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
@@ -14,6 +15,15 @@ export class AdsListComponent implements OnInit {
   public adsData = null;
 
   search = new FormControl('');
+
+  refresh() {
+    // this.router.navigate(['/'])
+    this._dataService.getAds()
+    .subscribe(adsData => {
+      this.adsData = adsData
+    })
+    this.search.setValue('');
+  }
 
   onSubmit() {
     if (this.search.value)
@@ -35,7 +45,7 @@ export class AdsListComponent implements OnInit {
     this.search.setValue('');
   }
 
-  constructor(private _dataService: ConfigService) { }
+  constructor(private _dataService: ConfigService, private router: Router) { }
 
   ngOnInit() {
     this._dataService.getAds()

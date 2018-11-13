@@ -89,6 +89,21 @@ export class ConfigService {
     })
   };
 
+  deleteAd(date): Observable<any> {
+    return Observable.create(observer=> {
+      this.http.post(`http://localhost:3000/deletead`,
+        {"date": `${date}`},
+        
+        {
+          headers: new HttpHeaders({
+            'content-type':  'application/json'
+          })
+        }
+
+      ).subscribe(res => {observer.next(res)})
+    })
+  };
+
   getLocation() {
     var options = {
       enableHighAccuracy: true,

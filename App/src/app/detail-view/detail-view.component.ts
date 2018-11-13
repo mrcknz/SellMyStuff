@@ -28,6 +28,17 @@ export class DetailViewComponent implements OnInit, OnDestroy {
     })
   });
 
+  deleteAd() {
+    this._dataService.deleteAd(this.selectedAd.date)
+    .subscribe(res=> {
+      if (res.command === 'DELETE') {
+        this.router.navigate(['/'])
+      }
+      console.log(res)
+    })
+
+  }
+
   onSubmit() {
     console.warn(this.profileForm.value);
 
@@ -67,7 +78,7 @@ export class DetailViewComponent implements OnInit, OnDestroy {
     
   }
 
-  constructor(private route: ActivatedRoute, private _dataService: ConfigService) {}
+  constructor(private route: ActivatedRoute, private _dataService: ConfigService, private router: Router) {}
   
 
   ngOnInit() {
