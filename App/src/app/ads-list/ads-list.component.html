@@ -1,3 +1,15 @@
+<button routerLink="/" routerLinkActive="active">Home</button>
+<form (ngSubmit)="onSubmit()">
+  <p>
+    <label>
+      Search ads:
+      <input type="text" [formControl]="search" >
+    </label>
+  </p>
+</form>
+<button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
+  
+
 <div *ngFor="let ad of adsData">
   <a [routerLink]="['/details', ad.date]"  routerLinkActive="active">
   <h5>
@@ -15,7 +27,7 @@
     length: {{ad.length}} 
     width: {{ad.width}}
     height: {{ad.height}}
-    weight: {{ad.weigth}}
+    weight: {{ad.weight}}
   </h5> 
 </a>
 </div>

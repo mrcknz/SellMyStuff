@@ -21,6 +21,7 @@ export class CreateAdComponent implements OnInit {
   public addressData = null;
   public statusPostAd;
   public file;
+  public date;
   loading: any;
 
   profileForm = new FormGroup({
@@ -65,8 +66,9 @@ export class CreateAdComponent implements OnInit {
 
   onSubmit() {
     console.warn(this.profileForm.value);
-
+    
     this._dataService.postAds(
+      this.date,
       this.profileForm.value.username, 
       this.profileForm.value.itemDetails.description, 
       this.profileForm.value.itemDetails.pictureName, 
@@ -91,6 +93,9 @@ export class CreateAdComponent implements OnInit {
   constructor(private _dataService: ConfigService) { }
 
   ngOnInit() {
+    let date = Date.now();
+    this.date = date;
+    
     this._dataService.getAddress()
       .subscribe(addressData => {
         this.addressData = addressData;

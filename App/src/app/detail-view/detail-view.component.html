@@ -1,7 +1,8 @@
 <p>
-  detail-view works! {{id}}
+    <button routerLink="/" routerLinkActive="active">Home</button>
+  
+    <button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
 </p>
-
   
 <p>Ad from: {{selectedAd.username}}</p>
 <img src={{selectedAd.picturename}}  alt="" style="width:70%"> 
@@ -50,7 +51,9 @@
   <h6>to: {{buyerLocation.city}}, {{buyerLocation.country}}</h6> 
   
   <div *ngFor="let shipment of quoteData.data.rates">
-    <h5>{{shipment.total_charge.amount}} {{shipment.total_charge.currency}} /
+    <h5>{{(shipment.total_charge.amount*0.11).toFixed(2)}} EUR
+      <!-- {{shipment.total_charge.currency}}  -->
+      /
     by: {{shipment.shipper_account.slug}} /
     via: {{shipment.service_name}}
     </h5> 

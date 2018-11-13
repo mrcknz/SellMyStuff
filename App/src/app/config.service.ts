@@ -15,6 +15,21 @@ export class ConfigService {
 
   constructor(private http: HttpClient) { }
 
+  searchAds(searchTerm): Observable<any> {
+    return Observable.create(observer=> {
+      this.http.post(`http://localhost:3000/search`,
+        {"search": `${searchTerm}`},
+        
+        {
+          headers: new HttpHeaders({
+            'content-type':  'application/json'
+          })
+        }
+
+      ).subscribe(res => {observer.next(res)})
+    })
+  };
+
 
   uploadFile(file): Observable<any> {
 
@@ -59,10 +74,10 @@ export class ConfigService {
 
 
 
-  postAds(username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight): Observable<any> {
+  postAds(date, username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight): Observable<any> {
     return Observable.create(observer=> {
       this.http.post(`http://localhost:3000/createad`,
-        {"username": `${username}`, "description": `${description}`, "pictureName": `${pictureName}`, "lat": `${lat}`, "lon": `${lon}`, "country": `${country}`, "city": `${city}`, "postcode": `${postcode}`, "road": `${road}`, "house_number": `${house_number}`, "length": `${length}`, "width": `${width}`, "height": `${height}`, "weight": `${weight}`},
+        {"date": `${date}`, "username": `${username}`, "description": `${description}`, "pictureName": `${pictureName}`, "lat": `${lat}`, "lon": `${lon}`, "country": `${country}`, "city": `${city}`, "postcode": `${postcode}`, "road": `${road}`, "house_number": `${house_number}`, "length": `${length}`, "width": `${width}`, "height": `${height}`, "weight": `${weight}`},
         
         {
           headers: new HttpHeaders({
@@ -196,6 +211,7 @@ export class ConfigService {
   // }
 
   getShipments(selectedAddData, buyerLocation): Observable<any> {
+    console.log('ewfefd',selectedAddData.weight)
 
     return Observable.create(observer => {
       this.getAddress().subscribe(addressData => {
@@ -218,13 +234,13 @@ export class ConfigService {
                       "description": "Food XS",
                       "box_type": "custom",
                       "weight": {
-                        "value": 1,
+                        "value": selectedAddData.weight,
                         "unit": "kg"
                       },
                       "dimension": {
-                        "width": 20,
-                        "height": 40,
-                        "depth": 40,
+                        "width": selectedAddData.width,
+                        "height": selectedAddData.height,
+                        "depth": selectedAddData.length,
                         "unit": "cm"
                       },
                       "items": [
