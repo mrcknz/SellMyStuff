@@ -74,10 +74,10 @@ export class ConfigService {
 
 
 
-  postAds(date, username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight): Observable<any> {
+  postAds(price, title, date, username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight): Observable<any> {
     return Observable.create(observer=> {
       this.http.post(`http://localhost:3000/createad`,
-        {"date": `${date}`, "username": `${username}`, "description": `${description}`, "pictureName": `${pictureName}`, "lat": `${lat}`, "lon": `${lon}`, "country": `${country}`, "city": `${city}`, "postcode": `${postcode}`, "road": `${road}`, "house_number": `${house_number}`, "length": `${length}`, "width": `${width}`, "height": `${height}`, "weight": `${weight}`},
+        {"price": `${price}`, "title": `${title}`, "date": `${date}`, "username": `${username}`, "description": `${description}`, "pictureName": `${pictureName}`, "lat": `${lat}`, "lon": `${lon}`, "country": `${country}`, "city": `${city}`, "postcode": `${postcode}`, "road": `${road}`, "house_number": `${house_number}`, "length": `${length}`, "width": `${width}`, "height": `${height}`, "weight": `${weight}`},
         
         {
           headers: new HttpHeaders({

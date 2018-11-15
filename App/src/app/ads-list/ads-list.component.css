@@ -1,14 +1,39 @@
-.nav {
-    color: aqua;
-    border: 1px solid aqua;
+.list {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    overflow: scroll;  
+    justify-content: center; 
+
+}
+
+.price {
+    font-style: italic;
+    font-weight: 700;
+    text-align: end;
+}
+
+.item {
+    border: 1px solid aqua;
     border-radius: 10px;
+    padding: 5px;
+    width: 100px;
+}
+
+.nav {
+    color: aqua;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    /* position: fixed; */
+
 }
 
 .search {
-    flex-grow: 10; /* default 0 */
+    flex-grow: 10; 
     display: flex;  
     align-items: center;
 }
@@ -41,6 +66,7 @@
     color: aqua;
     height: 80%;
     margin:0;
+
 }
 
 .searchC {
@@ -54,5 +80,7 @@
 
     width: auto;
     height: 100%;
+    font-size: 17px;
+
 }
 

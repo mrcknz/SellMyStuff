@@ -1,3 +1,5 @@
+
+
 <div class = "nav">
   <button class="home" (click)="refresh()" routerLinkActive="active">Home</button>
   <form (ngSubmit)="onSubmit()"  class="search">
@@ -10,24 +12,14 @@
   <button class="newad" routerLink="/newad" routerLinkActive="active">Create New Ad</button>
 </div>
 
+<div class="list">
 <div class="list" *ngFor="let ad of adsData">
-  <a [routerLink]="['/details', ad.date]"  routerLinkActive="active">
-    <div>
-      added on: {{ad.date}}, 
-      Ad By {{ad.username}}, 
-      <img src={{ad.picturename}}  alt="" style="width:100px"> 
-      about: {{ad.description}}
-      lat: {{ad.lat}}
-      lon: {{ad.lon}}
-      country: {{ad.country}}
-      city: {{ad.city}} 
-      postcode: {{ad.postcode}} 
-      postcode: {{ad.road}}
-      house nr: {{ad.house_number}}
-      length: {{ad.length}} 
-      width: {{ad.width}}
-      height: {{ad.height}}
-      weight: {{ad.weight}}
-    </div> 
-  </a>
+  <div class="item" [routerLink]="['/details', ad.date]"  routerLinkActive="active">
+    <img src={{ad.picturename}}  alt="" style="width:100px; border-radius: 10px" class="pic"> 
+    <!-- <div class="date">added on: {{ad.date}}</div> -->
+    <div class="title">{{ad.title}} </div>
+    <div class="city">{{ad.city}}</div>
+    <div class="price">{{ad.price}} €</div>
+  </div>
+</div>
 </div>

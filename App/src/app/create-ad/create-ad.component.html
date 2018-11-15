@@ -2,87 +2,95 @@
   
     <label>
       Username:
-      <input type="text" formControlName="username">
+      <input class="field" type="text" formControlName="username">
     </label>
 
-    <div formGroupName="itemDetails">
+    <div class="form" formGroupName="itemDetails">
       <h3>Item to sell:</h3>
+
+      <label>
+          Title:
+          <input class="field" type="text" formControlName="title">
+        </label>
     
       <label>
         Description:
-        <input type="text" formControlName="description">
-      </label>
-    
-      <label>
-        Add Picture:
-        <input type="text" formControlName="pictureName">
+        <input class="field description" type="text" formControlName="description">
       </label>
 
       <label>
-        <img src={{profileForm.value.itemDetails.pictureName}} alt="Upload Picture" style="width:100px">
-        <input (change)="upload()" type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+          Price:
+          <input class="field" type="text" formControlName="price"> €
+      </label>
+    
+      <!-- <label>
+        Add Picture:
+        <input class="field" type="text" formControlName="pictureName">
+      </label> -->
+
+      <label>
+        <img src={{profileForm.value.itemDetails.pictureName}}  style="width:100px; border-radius: 10%">
+        Picture:<input class="submitAA" (change)="upload()" type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
       </label>
       
     </div>
 
-    <div formGroupName="package">
+    <div class="form" formGroupName="package">
       <h3>Packaging Details:</h3>
     
       <label>
         Length:
-        <input type="text" formControlName="length">cm
+        <input class="field" type="text" formControlName="length">cm
       </label>
     
       <label>
         Width:
-        <input type="text" formControlName="width">cm
+        <input class="field" type="text" formControlName="width">cm
       </label>
 
       <label>
         Height:
-        <input type="text" formControlName="height">cm
+        <input class="field" type="text" formControlName="height">cm
       </label>
 
       <label>
         Weight:
-        <input type="text" formControlName="weight">kg
+        <input class="field" type="text" formControlName="weight">kg
       </label>
     
     </div>
 
-    <div formGroupName="address">
+    <div class="form" formGroupName="address">
       <h3>Item would be shipped from:</h3>
     
       <label>
         Street:
-        <input type="text" formControlName="road">
+        <input class="field" type="text" formControlName="road">
       </label>
     
       <label>
         House Number:
-        <input type="text" formControlName="house_number">
+        <input class="field" type="text" formControlName="house_number">
       </label>
       
       <label>
         City:
-        <input type="text" formControlName="city">
+        <input class="field" type="text" formControlName="city">
       </label>
     
       <label>
         Postal Code:
-        <input type="text" formControlName="postcode">
+        <input class="field" type="text" formControlName="postcode">
       </label>
 
       <label>
         Country:
-        <input type="text" formControlName="country">
+        <input class="field" type="text" formControlName="country">
       </label>
     
     </div>
     
-      <button type="submit" [disabled]="!profileForm.valid">Submit the Ad</button>
-      <button routerLink="/" routerLinkActive="active">Cancel</button>
-      
+      <button class="submitA" type="submit" [disabled]="!profileForm.valid">Submit the Ad</button>
+      <button class="submitA" routerLink="/" routerLinkActive="active">Cancel</button>
 </form>
-<p>{{addressData.address.road}}</p>
   

@@ -26,9 +26,12 @@ export class CreateAdComponent implements OnInit {
   loading: any;
 
   profileForm = new FormGroup({
+    
     username: new FormControl(''),
     itemDetails: new FormGroup({
+      title: new FormControl(''),
       description: new FormControl(''),
+      price: new FormControl(''),
       pictureName: new FormControl(''),
     }),
     package: new FormGroup({
@@ -69,6 +72,8 @@ export class CreateAdComponent implements OnInit {
     console.warn(this.profileForm.value);
     
     this._dataService.postAds(
+      this.profileForm.value.itemDetails.price,
+      this.profileForm.value.itemDetails.title,
       this.date,
       this.profileForm.value.username, 
       this.profileForm.value.itemDetails.description, 
