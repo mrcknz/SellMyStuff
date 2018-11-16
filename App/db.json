@@ -1,0 +1,97 @@
+{
+  "adsData": [
+    {
+      "username": "marcomarcster",
+      "title": "Really Cool Chair",
+      "description": "description about a really cool chair",
+      "price": "50",
+      "picturename": "http://res.cloudinary.com/cjrrcrosr/image/upload/c_scale,h_200,w_200/v1542356921/chair.jpg",
+      "length": "10",
+      "width": "3",
+      "height": "4",
+      "weight": "6",
+      "road": "Carrer Avila",
+      "house_number": "29",
+      "city": "Barcelona",
+      "postcode": "08005",
+      "country": "Spain",
+      "lat": "41.3851",
+      "lon": "2.1734"
+    },
+    {
+      "username": "bobbybobster",
+      "title": "Macbook Air",
+      "description": "this is a description of a really cool item",
+      "price": "2",
+      "picturename": "http://res.cloudinary.com/cjrrcrosr/image/upload/c_scale,h_200,w_200/v1542357158/laptop.jpg",
+      "length": "5",
+      "width": "2",
+      "height": "3",
+      "weight": "6",
+      "road": "Carrer Avila",
+      "house_number": "29",
+      "city": "Barcelona",
+      "postcode": "08005",
+      "country": "Spain",
+      "lat": "41.3851",
+      "lon": "2.1734"
+    },
+
+    {
+      "username": "marcomarcster",
+      "title": "Table table tabl",
+      "description": "this is a description of a really crap item",
+      "price": "50",
+      "picturename": "http://res.cloudinary.com/cjrrcrosr/image/upload/c_scale,h_200,w_200/v1542356921/table.jpg",
+      "length": "10",
+      "width": "3",
+      "height": "4",
+      "weight": "6",
+      "road": "Carrer Avila",
+      "house_number": "29",
+      "city": "Barcelona",
+      "postcode": "08005",
+      "country": "Spain",
+      "lat": "41.3851",
+      "lon": "2.1734"
+    },
+
+    {
+      "username": "marcomarcster",
+      "title": "Amazing Bike",
+      "description": "this is a description of a really amazing bike",
+      "price": "50",
+      "picturename": "http://res.cloudinary.com/cjrrcrosr/image/upload/c_scale,h_200,w_200/v1542357216/bike.jpg",
+      "length": "10",
+      "width": "3",
+      "height": "4",
+      "weight": "6",
+      "road": "Carrer Avila",
+      "house_number": "29",
+      "city": "Barcelona",
+      "postcode": "08005",
+      "country": "Spain",
+      "lat": "41.3851",
+      "lon": "2.1734"
+    },
+
+    {
+      "username": "bobbybobster",
+      "title": "Learn Javascript",
+      "description": "this is a description of a really cool item",
+      "price": "2",
+      "picturename": "http://res.cloudinary.com/cjrrcrosr/image/upload/c_scale,h_200,w_200/v1542356921/books.jpg",
+      "length": "5",
+      "width": "2",
+      "height": "3",
+      "weight": "6",
+      "road": "Carrer Avila",
+      "house_number": "29",
+      "city": "Barcelona",
+      "postcode": "08005",
+      "country": "Spain",
+      "lat": "41.3851",
+      "lon": "2.1734"
+    }
+  ]
+}

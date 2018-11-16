@@ -1,10 +1,43 @@
-<p>
-  <button routerLink="/" routerLinkActive="active">Home</button>
+<!--
+  <p>
+    <button routerLink="/" routerLinkActive="active">Home</button>
 
-  <label>
-      Search ads:
-      <input type="text" [formControl]="search" (ngSubmit)="onSubmit()">
-  </label>
+    <label>
+        Search ads:
+        <input type="text" [formControl]="search" (ngSubmit)="onSubmit()">
+    </label>
 
-  <button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
-</p>
+    <button routerLink="/newad" routerLinkActive="active">Create New Ad</button>
+  </p>
+-->
+<!--
+  <button class="newad" routerLink="/newad" routerLinkActive="active">
+    Create New Ad
+  </button>
+-->
+
+<div style="height: 11vh;">
+  <mat-toolbar class="nav-bar" color="primary">
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Help</button>
+    </mat-menu>
+
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button>
+        <mat-icon class="menu" (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+    </div>
+    <span> Cool Name</span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <a href="#" mat-button>Search</a> <a href="#" mat-button>Post an Ad</a>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav #sidenav fxLayout="column">
+      <div fxLayout="column">
+        <a href="#" mat-button>Search</a> <a href="#" mat-button>Post Ad</a>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
