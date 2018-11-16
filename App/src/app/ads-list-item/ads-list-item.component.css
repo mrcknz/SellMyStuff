@@ -1,7 +1,6 @@
 .mat-card,
 .ad-card {
   max-width: 400px;
-  padding-bottom: 40px;
 }
 
 .avatar {
@@ -12,8 +11,4 @@
 .mat-card-header {
   align-items: center;
   padding: 5px;
-}
-
-.mat-card-actions {
-  padding: 0;
 }
