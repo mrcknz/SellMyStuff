@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { HttpHeaders } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 
 import {
   MatCardModule,
@@ -16,7 +17,9 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatStepperModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
@@ -66,13 +69,16 @@ const appRoutes: Routes = [
     MatInputModule,
     MatMenuModule,
     MatSidenavModule,
+    MatStepperModule,
     CommonModule,
     FormsModule,
     FlexLayoutModule,
+    MatAutocompleteModule,
     BrowserModule,
     BrowserAnimationsModule,
     Ng2CloudinaryModule,
     HttpClientModule,
+    NgMatSearchBarModule,
     RouterModule.forRoot(
       appRoutes
       // { enableTracing: true }

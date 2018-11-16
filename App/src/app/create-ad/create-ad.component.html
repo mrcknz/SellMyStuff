@@ -1,96 +1,103 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  
-    <label>
-      Username:
-      <input class="field" type="text" formControlName="username">
-    </label>
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Item Details</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Title" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Price €"
+            formControlName="firstCtrl"
+            required
+          />
+        </mat-form-field>
 
-    <div class="form" formGroupName="itemDetails">
-      <h3>Item to sell:</h3>
-
-      <label>
-          Title:
-          <input class="field" type="text" formControlName="title">
+        <label>
+          <img
+            src="{{profileForm.value.itemDetails.pictureName}}"
+            style="width:100px; border-radius: 10%"
+          />
+          <input
+            class="submitAA"
+            (change)="upload()"
+            type="file"
+            ng2FileSelect
+            [uploader]="uploader"
+            accept="image/*;capture=camera"
+          />
         </label>
-    
-      <label>
-        Description:
-        <input class="field description" type="text" formControlName="description">
-      </label>
 
-      <label>
-          Price:
-          <input class="field" type="text" formControlName="price"> €
-      </label>
-    
-      <!-- <label>
-        Add Picture:
-        <input class="field" type="text" formControlName="pictureName">
-      </label> -->
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Description"
+            formControlName="firstCtrl"
+            required
+          ></textarea>
+        </mat-form-field>
+        <div><button mat-button matStepperNext>Next</button></div>
+      </form>
+    </mat-step>
 
-      <label>
-        <img src={{profileForm.value.itemDetails.pictureName}}  style="width:100px; border-radius: 10%">
-        Picture:<input class="submitAA" (change)="upload()" type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
-      </label>
-      
-    </div>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Packaging Details</ng-template>
 
-    <div class="form" formGroupName="package">
-      <h3>Packaging Details:</h3>
-    
-      <label>
-        Length:
-        <input class="field" type="text" formControlName="length">cm
-      </label>
-    
-      <label>
-        Width:
-        <input class="field" type="text" formControlName="width">cm
-      </label>
+        <mat-form-field>
+          <input matInput placeholder="Length (cm)" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Widgth (cm)" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="height (cm)" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Weight (kg)" />
+        </mat-form-field>
 
-      <label>
-        Height:
-        <input class="field" type="text" formControlName="height">cm
-      </label>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
 
-      <label>
-        Weight:
-        <input class="field" type="text" formControlName="weight">kg
-      </label>
-    
-    </div>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Item Location</ng-template>
 
-    <div class="form" formGroupName="address">
-      <h3>Item would be shipped from:</h3>
-    
-      <label>
-        Street:
-        <input class="field" type="text" formControlName="road">
-      </label>
-    
-      <label>
-        House Number:
-        <input class="field" type="text" formControlName="house_number">
-      </label>
-      
-      <label>
-        City:
-        <input class="field" type="text" formControlName="city">
-      </label>
-    
-      <label>
-        Postal Code:
-        <input class="field" type="text" formControlName="postcode">
-      </label>
+        <mat-form-field>
+          <input matInput placeholder="House Number" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Street" />
+        </mat-form-field>
+        <mat-form-field> <input matInput placeholder="City" /> </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Postcode" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Country" />
+        </mat-form-field>
 
-      <label>
-        Country:
-        <input class="field" type="text" formControlName="country">
-      </label>
-    
-    </div>
-    
-      <button class="submitA" type="submit" [disabled]="!profileForm.valid">Submit the Ad</button>
-      <button class="submitA" routerLink="/" routerLinkActive="active">Cancel</button>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now ready to post your Ad
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.submit()">Submit</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
 </form>
-  
