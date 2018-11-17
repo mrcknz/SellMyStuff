@@ -3,6 +3,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Address } from './Address';
 import { Observable, Subject } from 'rxjs';
 import { AppComponent } from './app.component';
+import {Ad} from './ad';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,53 @@ export class ConfigService {
     // return Observable.create(observer=> {
     //   this.http.get('http://localhost:3000').subscribe(res => {observer.next(res)})
     // })
+  }
+
+  postAds(
+             price,
+            title,
+            date,
+            username,
+            description,
+            pictureName,
+            
+            country,
+            city,
+            postcode,
+            road,
+            house_number,
+            length,
+            width,
+            height,
+            weight
+  ): Observable<any> {
+    return this.http.post('http://localhost:3000/',
+              {price: `${price}`,
+              title: `${title}`,
+              date: `${date}`,
+              username: `${username}`,
+              description: `${description}`,
+              pictureName: `${pictureName}`,
+              
+              country: `${country}`,
+              city: `${city}`,
+              postcode: `${postcode}`,
+              road: `${road}`,
+              house_number: `${house_number}`,
+              length: `${length}`,
+              width: `${width}`,
+              height: `${height}`,
+              weight: `${weight}`
+            },
+  
+            {
+              headers: new HttpHeaders({
+                'content-type': 'application/json'
+              })
+            }
+          )
+
+
   }
 
   // searchAds(searchTerm): Observable<any> {
@@ -39,27 +87,27 @@ export class ConfigService {
   //   });
   // }
 
-  // uploadFile(file): Observable<any> {
-  //   return Observable.create(observer => {
-  //     this.http
-  //       .post(
-  //         `https://api.cloudinary.com/v1_1/truroer/image/upload`,
-  //         {
-  //           file: file,
-  //           upload_preset: 'ynqkvkei'
-  //         },
+  uploadFile(file): Observable<any> {
+    return Observable.create(observer => {
+      this.http
+        .post(
+          `https://api.cloudinary.com/v1_1/cjrrcrosr/image/upload`,
+          {
+            file: file,
+            upload_preset: 'ynqkvkei'
+          },
 
-  //         {
-  //           headers: new HttpHeaders({
-  //             'content-type': 'application/json'
-  //           })
-  //         }
-  //       )
-  //       .subscribe(res => {
-  //         observer.next(res);
-  //       });
-  //   });
-  // }
+          {
+            headers: new HttpHeaders({
+              'content-type': 'application/json'
+            })
+          }
+        )
+        .subscribe(res => {
+          observer.next(res);
+        });
+    });
+  }
 
   // getCountryCode(country): Observable<any> {
   //   return Observable.create(observer => {
@@ -80,23 +128,23 @@ export class ConfigService {
   // }
 
   // postAds(
-  //   price,
-  //   title,
-  //   date,
-  //   username,
-  //   description,
-  //   pictureName,
-  //   lat,
-  //   lon,
-  //   country,
-  //   city,
-  //   postcode,
-  //   road,
-  //   house_number,
-  //   length,
-  //   width,
-  //   height,
-  //   weight
+  //  price,
+  //           title,
+  //           date,
+  //           username,
+  //           description,
+  //           pictureName,
+  //           lat,
+  //           lon,
+  //           country,
+  //           city,
+  //           postcode,
+  //           road,
+  //           house_number,
+  //           length,
+  //           width,
+  //           height,
+  //           weight
   // ): Observable<any> {
   //   return Observable.create(observer => {
   //     this.http
