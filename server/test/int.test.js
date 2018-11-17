@@ -31,11 +31,7 @@ describe('Routes', () => {
 		expect(response.type).toEqual('application/json');
 	});
 
-	test('PUT /ads/:id should return status 200', async () => {
-		const response = await request(server).put('/ads/:id');
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual('application/json');
-	});
+
 
 	test('should return status 404 on undefined routes/methods', async () => {
 		const response1 = await request(server).get('/asdf');
