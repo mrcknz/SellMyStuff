@@ -5,18 +5,17 @@ import { Subscriber } from 'rxjs';
 @Component({
   selector: 'app-your',
   templateUrl: './your.component.html',
-  styleUrls: ['./your.component.css']
+  styleUrls: [
+    './your.component.css'
+  ]
 })
 export class YourComponent implements OnInit {
-
   public pos;
 
-  constructor(private _dataService: ConfigService) { }
+  constructor(private _dataService: ConfigService) {}
 
   ngOnInit() {
-    this.pos = this._dataService.getLocation()
-      // .subscribe(data => this.pos = data)
-
+    this.pos = this._dataService.getLocation();
+    // .subscribe(data => this.pos = data)
   }
-
 }
