@@ -1,48 +1,47 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <!-- <mat-vertical-stepper [linear]="isLinear" #stepper> -->
-  <!-- <mat-step [stepControl]="firstFormGroupStep"> -->
-  <form [formGroup]="firstFormGroup">
-    <ng-template matStepLabel>Item Details</ng-template>
-    <mat-form-field>
-      <input formControlName="title" matInput placeholder="Title" />
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Price €"
-        formControlName="firstCtrl"
-        required
-      />
-    </mat-form-field>
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroupStep">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Item Details</ng-template>
+        <mat-form-field>
+          <input formControlName="title" matInput placeholder="Title" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Price €"
+            formControlName="firstCtrl"
+            required
+          />
+        </mat-form-field>
 
-    <label>
-      <img
-        src="{{profileForm.value.itemDetails.pictureName}}"
-        style="width:100px; border-radius: 10%"
-      />
-      <input
-        class="submitAA"
-        (change)="upload()"
-        type="file"
-        ng2FileSelect
-        [uploader]="uploader"
-        accept="image/*;capture=camera"
-      />
-    </label>
+        <label>
+          <img
+            src="{{profileForm.value.itemDetails.pictureName}}"
+            style="width:100px; border-radius: 10%"
+          />
+          <input
+            class="submitAA"
+            (change)="upload()"
+            type="file"
+            ng2FileSelect
+            [uploader]="uploader"
+            accept="image/*;capture=camera"
+          />
+        </label>
 
-    <mat-form-field>
-      <textarea
-        matInput
-        placeholder="Description"
-        formControlName="firstCtrl"
-        required
-      ></textarea>
-    </mat-form-field>
-    <!-- <div><button mat-button matStepperNext>Next</button></div> -->
-  </form>
-  <!-- </mat-step> -->
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Description"
+            formControlName="firstCtrl"
+            required
+          ></textarea>
+        </mat-form-field>
+        <div><button mat-button matStepperNext>Next</button></div>
+      </form>
+    </mat-step>
 
-  <!--
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Packaging Details</ng-template>
@@ -100,6 +99,5 @@
         <button mat-button type="submit">Submit</button>
       </div>
     </mat-step>
-  -->
-  <!-- </mat-vertical-stepper> -->
+  </mat-vertical-stepper>
 </form>
