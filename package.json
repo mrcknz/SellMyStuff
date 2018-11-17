@@ -1,29 +1,33 @@
 {
-  "name": "SellMyStuff",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "husky": "^1.1.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
-  "scripts": {
-    "test": "echo \"no test script defined"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mrcknz/SellMyStuff.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mrcknz/SellMyStuff/issues"
-  },
-  "homepage": "https://github.com/mrcknz/SellMyStuff#readme"
+	"name": "SellMyStuff",
+	"version": "0.1.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {},
+	"devDependencies": {
+		"@ljharb/eslint-config": "^13.0.0",
+		"@shinnn/eslint-config-node": "^6.0.2",
+		"eslint": "^5.9.0",
+		"husky": "^1.1.4"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint"
+		}
+	},
+	"scripts": {
+		"lint": "eslint \"server/**/*.{js,jsx}\"",
+		"test": "echo \"no test script defined"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mrcknz/SellMyStuff.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/mrcknz/SellMyStuff/issues"
+	},
+	"homepage": "https://github.com/mrcknz/SellMyStuff#readme"
 }
