@@ -1,6 +1,6 @@
 <mat-toolbar class="nav-bar" color="primary">
   <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon class="menu" (click)="sidenav.toggle()">menu</mat-icon>
+    <mat-icon class="menu">menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/newad" routerLinkActive="active">
@@ -11,13 +11,7 @@
 
   <mat-form-field class="search-field">
     <input matInput type="text" placeholder="Search" [(ngModel)]="value" />
-    <button
-      mat-button
-      *ngIf="value"
-      matSuffix
-      mat-icon-button
-      (click)="value = ''"
-    >
+    <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value = ''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>

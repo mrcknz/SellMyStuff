@@ -1,0 +1,9 @@
+{
+  "prettier.openOutput": false,
+  "prettier.tabWidth": 2,
+  "prettier.typescriptEnable": [
+    "typescript",
+    "typescriptreact"
+  ],
+  "prettier.useTabs": false
+}

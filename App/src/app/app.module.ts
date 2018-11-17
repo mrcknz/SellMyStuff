@@ -5,8 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { HttpHeaders } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 
 import {
@@ -72,7 +71,6 @@ const appRoutes: Routes = [
     MatStepperModule,
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
     MatAutocompleteModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -86,7 +84,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule
     // HttpHeaders
   ],
-  providers: [ConfigService],
-  bootstrap: [AppComponent]
+  providers: [
+    ConfigService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {}

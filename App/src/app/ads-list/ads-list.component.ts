@@ -9,7 +9,9 @@ import { Ad } from '../ad';
   // moduleId: module.id,
   selector: 'app-ads-list',
   templateUrl: './ads-list.component.html',
-  styleUrls: ['./ads-list.component.css']
+  styleUrls: [
+    './ads-list.component.css'
+  ]
 })
 export class AdsListComponent implements OnInit {
   adsData: Ad[];
@@ -22,9 +24,8 @@ export class AdsListComponent implements OnInit {
 
   getAds() {
     console.log('adsdata', this.adsData);
-
     console.log('testdata', this._dataService);
-    this._dataService.getAds().subscribe(data => {
+    this._dataService.getAds().subscribe((data) => {
       this.adsData = data;
     });
   }
