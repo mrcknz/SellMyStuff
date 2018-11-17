@@ -1,21 +1,27 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Maxim Sinelnikov",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "mysql": "github:mysqljs/mysql",
-    "pg": "^7.6.1",
-    "pg-promise": "^8.5.2",
-    "router": "^1.3.3",
-    "sequelize": "^4.41.1"
-  }
+	"name": "sellmystuff-server",
+	"version": "0.1.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "ENV=test jest --watch",
+		"format": "prettier --write \"**/*.{js, jsx, css, json}\"",
+		"format:check": "prettier --list-different \"**/*.{js, jsx, css, json}\"",
+		"dev": "ENV=test nodemon"
+	},
+	"jest": {
+		"testEnvironment": "node"
+	},
+	"author": "Marco Kunz",
+	"license": "ISC",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.16.4",
+		"pg": "^7.6.1"
+	},
+	"devDependencies": {
+		"jest": "^23.6.0",
+		"prettier": "^1.15.2",
+		"supertest": "^3.3.0"
+	}
 }

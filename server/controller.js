@@ -1,44 +1,27 @@
-// const model = require('./model.js');
+const Ads = require('./model');
 
-const createTableAds = () => {
-  return `CREATE TABLE ads (price int, title varchar(80), date bigint,
-  username varchar(80), description varchar(80), pictureName varchar(80),
-  lat float, lon float, 
-  country varchar(80), city varchar(80), postcode int, road varchar(80), house_number int,
-  length int, width int, height int, weight int
-  )`
-}
+module.exports.createAd = async (req, res) => {
+	const ads = await Ads.create(req.body);
+	res.status(201).send(ads.rows[0]);
+};
 
-// const searchByCity = (searchCity) => {
-//   return `SELECT * FROM ads
-//   WHERE city = '${searchCity}'`
-// }
+module.exports.deleteAd = async (req, res) => {
+	try {
+		const result = await Ads.delete(req.params.id);
+		if (result.rowCount) res.status(200).end();
+		else res.status(404).end();
+	} catch (err) {
+		res.status(500).end();
+	}
+};
 
-const insertAd = (price, title, date, username, description, pictureName, lat, lon, country, city, postcode, road, house_number, length, width, height, weight) => {
-  return `INSERT INTO ads VALUES (${price}, '${title}', ${date},
-  '${username}', '${description}', '${pictureName}',
-  ${lat}, ${lon}, 
-  '${country}', '${city}', ${postcode}, '${road}', ${house_number},
-   ${length}, ${width}, ${height}, ${weight}
-  )`
-}
+module.exports.getAllAds = async (req, res) => {
+	const ads = await Ads.getAll();
+	res.status(200).send(ads.rows);
+};
 
-const deleteAd = (date) => {
-  return `DELETE FROM ads WHERE date = '${date}'`
-}
-
-const getAllAds = () => {
-  return `SELECT * FROM ads`
-}
-
-const deleteTable = (table) => {
-  return `DROP TABLE ${table}`
-}
-
-module.exports = {
-  getAllAds,
-  deleteTable,
-  insertAd,
-  createTableAds,
-  deleteAd
+module.exports.getAd = async (req, res) => {
+	const ads = await Ads.getOne(req.params.id);
+	if (ads.rows.length) res.status(200).send(ads.rows[0]);
+	else res.status(404).end();
 };
