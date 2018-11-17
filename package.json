@@ -13,7 +13,12 @@
     }
   },
   "scripts": {
-    "test": "echo \"no test script defined"
+    "test": "npm run test-server && npm run test-app",
+    "test-server": "cd server && npm run test",
+    "test-app": "cd App && npm run test",
+    "lint": "npm run lint-server && npm run lint-app",
+    "lint-server": "cd server && npm run lint",
+    "lint-app": "cd App && npm run lint"
   },
   "repository": {
     "type": "git",
