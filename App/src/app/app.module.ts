@@ -40,7 +40,7 @@ import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { AdsListItemComponent } from './ads-list-item/ads-list-item.component';
 import { PictureUploadComponent } from './picture-upload/picture-upload.component';
 import { Cloudinary, CloudinaryModule } from '@cloudinary/angular-5.x';
-// import cloudinaryConfig from './cloudinary.config';
+import cloudinaryConfig from './cloudinary.config';
 import * as cloudinary from 'cloudinary-core';
 
 const appRoutes: Routes = [
@@ -90,11 +90,15 @@ const appRoutes: Routes = [
       // { enableTracing: true }
     ),
     ReactiveFormsModule,
-    // CloudinaryModule.forRoot(cloudinary, cloudinaryConfig),
+    CloudinaryModule.forRoot(cloudinary, cloudinaryConfig),
     FileUploadModule
     // HttpHeaders
   ],
-  providers: [ConfigService],
-  bootstrap: [AppComponent]
+  providers: [
+    ConfigService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {}
