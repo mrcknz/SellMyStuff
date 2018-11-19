@@ -6,56 +6,54 @@
         <input formControlName="title" matInput placeholder="Title" required />
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Price €" formControlName="price" required type="number" />
+        <textarea matInput placeholder="Description" formControlName="description" required></textarea>
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        <input matInput placeholder="Price €" formControlName="price" type="number" required />
       </mat-form-field>
-      <div>
-        <img src="{{profileForm.value.pictureName}}" style="width:100px; border-radius: 10%" />
-        <input formControlName="pictureName" class="submitAA" (change)="upload()" type="file" ng2FileSelect [uploader]="uploader"
-          accept="image/*;capture=camera" required />
-      </div>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
-      <ng-template matStepLabel>Item Location</ng-template>
-      <mat-form-field>
-        <input formControlName="street" matInput placeholder="Street" />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="City" />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Postcode" />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Country" />
-      </mat-form-field>
-
+    <mat-step [stepControl]="pictures">
+      <ng-template matStepLabel>Pictures</ng-template>
+      <app-picture-upload></app-picture-upload>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step [stepControl]="packaging">
+    <mat-step [stepControl]="location" optional>
+      <ng-template matStepLabel>Item Location</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Country" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="City" />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="packaging" optional>
       <ng-template matStepLabel>Packaging Details</ng-template>
-
       <mat-form-field>
-        <input formControlName="length" matInput placeholder="Length [cm]" />
+        <input formControlName="length" matInput placeholder="Length" />
+        <mat-hint>in cm</mat-hint>
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="width" matInput placeholder="Width [cm]" />
+        <input formControlName="width" matInput placeholder="Width" />
+        <mat-hint>in cm</mat-hint>
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="height" matInput placeholder="Height [cm]" />
+        <input formControlName="height" matInput placeholder="Height" />
+        <mat-hint>in cm</mat-hint>
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="weight" matInput placeholder="Weight [kg]" />
+        <input formControlName="weight" matInput placeholder="Weight" />
+        <mat-hint>in cm</mat-hint>
       </mat-form-field>
-
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button type="submit">Submit</button>

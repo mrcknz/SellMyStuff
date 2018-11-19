@@ -37,6 +37,10 @@ import { FormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { AdsListItemComponent } from './ads-list-item/ads-list-item.component';
+import { PictureUploadComponent } from './picture-upload/picture-upload.component';
+import { Cloudinary, CloudinaryModule } from '@cloudinary/angular-5.x';
+import cloudinaryConfig from './cloudinary.config';
+import * as cloudinary from 'cloudinary-core';
 
 const appRoutes: Routes = [
   { path: '', component: AdsListComponent },
@@ -54,7 +58,8 @@ const appRoutes: Routes = [
     CreateAdComponent,
     DetailViewComponent,
     AdsListComponent,
-    AdsListItemComponent
+    AdsListItemComponent,
+    PictureUploadComponent
     // FileSelectDirective
   ],
   imports: [
@@ -81,7 +86,9 @@ const appRoutes: Routes = [
       appRoutes
       // { enableTracing: true }
     ),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CloudinaryModule.forRoot(cloudinary, cloudinaryConfig),
+    FileUploadModule
     // HttpHeaders
   ],
   providers: [
