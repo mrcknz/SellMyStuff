@@ -29,7 +29,8 @@ adsModel.getAll = async function() {
 };
 
 adsModel.search = async function(searchTerm) {
-  const q = await adsModel.Ad.find({ $text: { $title: searchTerm } }).exec();
+  // adsModel.Ad.createIndex({ title: 'text', description: 'text' });
+  const q = await adsModel.Ad.find({ $text: { $search: searchTerm } }).exec();
   console.log('test', q);
   return q;
 };

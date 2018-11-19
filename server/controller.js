@@ -10,7 +10,7 @@ module.exports.search = async (req, res) => {
   const query = req.query.q;
 
   res.status(200);
-  res.send(await adsModel.getAll(query));
+  res.send(await adsModel.search(query));
 };
 
 module.exports.getAd = async (req, res) => {

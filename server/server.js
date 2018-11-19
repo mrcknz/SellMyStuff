@@ -9,7 +9,7 @@ app
     controller.getAllAds(req, res);
   })
 
-  .get('/ads', (req, res) => {
+  .get('/ads/search', (req, res) => {
     controller.search(req, res);
   })
 
