@@ -4,18 +4,18 @@ import { Subscriber } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Ad } from '../ad';
 
 @Component({
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
-  styleUrls: [
-    './detail-view.component.css'
-  ]
+  styleUrls: ['./detail-view.component.css']
 })
-export class DetailViewComponent implements OnInit, OnDestroy {
-  id: number;
+export class DetailViewComponent implements OnInit {
+  public id;
+  ad = Ad;
   private sub: any;
-  private selectedAd;
+  // private ad;
   private buyerLocation;
   public quoteData = null;
 
@@ -29,35 +29,24 @@ export class DetailViewComponent implements OnInit, OnDestroy {
     })
   });
 
-  deleteAd() {
-    this._dataService.deleteAd(this.selectedAd.date).subscribe((res) => {
-      if (res.command === 'DELETE') {
-        this.router.navigate([
-          '/'
-        ]);
-      }
-      console.log(res);
-    });
-  }
-
   onSubmit() {
     console.warn(this.profileForm.value);
 
     this.buyerLocation = this.profileForm.value.address;
 
-    this._dataService.getCountryCode(this.selectedAd.country).subscribe((countryCode) => {
+    this._dataService.getCountryCode(this.country).subscribe(countryCode => {
       this._dataService
         .getShipments(
           {
-            length: this.selectedAd.length,
-            width: this.selectedAd.width,
-            height: this.selectedAd.height,
-            weight: this.selectedAd.weight,
+            length: this.ad.length,
+            width: this.ad.width,
+            height: this.ad.height,
+            weight: this.ad.weight,
             country: countryCode,
-            city: this.selectedAd.city,
-            postcode: this.selectedAd.postcode,
-            road: this.selectedAd.road,
-            house_number: this.selectedAd.house_number
+            city: this.ad.city,
+            postcode: this.ad.postcode,
+            road: this.ad.road,
+            house_number: this.ad.house_number
           },
           {
             country: this.profileForm.value.address.country,
@@ -67,46 +56,62 @@ export class DetailViewComponent implements OnInit, OnDestroy {
             house_number: this.profileForm.value.address.house_number
           }
         )
-        .subscribe((quoteData) => {
+        .subscribe(quoteData => {
           console.log(quoteData);
           this.quoteData = quoteData;
         });
     });
   }
 
-  constructor(private route: ActivatedRoute, private _dataService: ConfigService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _dataService: ConfigService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe((params) => {
-      this.id = +params['date'];
-    });
-    this._dataService.getAds().subscribe((selectedAd) => {
-      this.selectedAd = selectedAd.find((x) => x.date === this.id);
-
-      this._dataService.getAddress().subscribe((addressData) => {
-        this.buyerLocation = addressData.address;
-        this.profileForm.patchValue({
-          address: {
-            road: addressData.address.road,
-            city: addressData.address.city,
-            postcode: addressData.address.postcode,
-            country: addressData.address.country,
-            house_number: addressData.address.house_number
-          }
-        });
-        this._dataService.getShipments(this.selectedAd, addressData.address).subscribe((quoteData) => {
-          this.quoteData = quoteData;
-        });
-
-        // this._dataService.getQuote()
-        // .subscribe(quoteData => {
-        //   this.quoteData = quoteData
-        // });
-      });
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getAd();
+    console.log('HELLO', this.id);
+  }
+  getAd() {
+    this._dataService.getAd(this.id).subscribe(data => {
+      this.ad = data;
     });
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+  deleteAd() {
+    this._dataService.deleteAd(this.id).subscribe(res => {
+      if (res.command === 'DELETE') {
+        this.router.navigate(['/']);
+      }
+      console.log(res);
+    });
   }
+  // this.sub = this.route.params.subscribe((params) => {
+  //   this.id = +params['date'];
+  // });
+  // this._dataService.getAds().subscribe((ad) => {
+  //   this.ad = ad.find((x) => x.date === this.id);
+
+  // this._dataService.getAddress().subscribe((addressData) => {
+  //   this.buyerLocation = addressData.address;
+  //   this.profileForm.patchValue({
+  //     address: {
+  //       road: addressData.address.road,
+  //       city: addressData.address.city,
+  //       postcode: addressData.address.postcode,
+  //       country: addressData.address.country,
+  //       house_number: addressData.address.house_number
+  //     }
+  //   });
+  //   this._dataService.getShipments(this.ad, addressData.address).subscribe((quoteData) => {
+  //     this.quoteData = quoteData;
+  //   });
+
+  // });
+
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 }

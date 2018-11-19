@@ -1,6 +1,7 @@
 {
   "adsData": [
     {
+      "id": "1",
       "username": "marcomarcster",
       "title": "Really Cool Chair",
       "description": "description about a really cool chair",
@@ -19,6 +20,7 @@
       "lon": "2.1734"
     },
     {
+      "id": "2",
       "username": "bobbybobster",
       "title": "Macbook Air",
       "description": "this is a description of a really cool item",
@@ -38,6 +40,7 @@
     },
 
     {
+      "id": "3",
       "username": "marcomarcster",
       "title": "Table table tabl",
       "description": "this is a description of a really crap item",
@@ -57,6 +60,7 @@
     },
 
     {
+      "id": "4",
       "username": "marcomarcster",
       "title": "Amazing Bike",
       "description": "this is a description of a really amazing bike",
@@ -76,6 +80,7 @@
     },
 
     {
+      "id": "5",
       "username": "bobbybobster",
       "title": "Learn Javascript",
       "description": "this is a description of a really cool item",

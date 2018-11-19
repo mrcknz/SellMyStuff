@@ -6,14 +6,12 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-quote',
   templateUrl: './quote.component.html',
-  styleUrls: [
-    './quote.component.css'
-  ]
+  styleUrls: ['./quote.component.css']
 })
 export class QuoteComponent implements OnInit {
   public quoteData = null;
 
-  @Input() selectedAddData: any;
+  @Input() addData: any;
   @Input() buyerLocation: any;
 
   profileForm = new FormGroup({
@@ -29,7 +27,7 @@ export class QuoteComponent implements OnInit {
   constructor(private _dataService: ConfigService) {}
 
   ngOnInit() {
-    this._dataService.getAddress().subscribe((addressData) => {
+    this._dataService.getAddress().subscribe(addressData => {
       this.profileForm.patchValue({
         address: {
           road: addressData.address.road,
@@ -41,9 +39,9 @@ export class QuoteComponent implements OnInit {
       });
     });
 
-    console.log(' sdffd s', this.selectedAddData);
+    console.log(' sdffd s', this.addData);
 
-    // this._dataService.getShipments(this.selectedAddData)
+    // this._dataService.getShipments(this.addData)
     //   .subscribe(quoteData => {
     //     this.quoteData = quoteData
     // });

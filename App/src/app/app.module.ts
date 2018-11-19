@@ -18,7 +18,8 @@ import {
   MatInputModule,
   MatSidenavModule,
   MatStepperModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatExpansionModule
 } from '@angular/material';
 
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
@@ -39,13 +40,14 @@ import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { AdsListItemComponent } from './ads-list-item/ads-list-item.component';
 import { PictureUploadComponent } from './picture-upload/picture-upload.component';
 import { Cloudinary, CloudinaryModule } from '@cloudinary/angular-5.x';
-import cloudinaryConfig from './cloudinary.config';
+// import cloudinaryConfig from './cloudinary.config';
 import * as cloudinary from 'cloudinary-core';
 
 const appRoutes: Routes = [
   { path: '', component: AdsListComponent },
   { path: 'newad', component: CreateAdComponent },
-  { path: 'details/:date', component: DetailViewComponent }
+  // { path: 'details/:date', component: DetailViewComponent }
+  { path: ':id', component: DetailViewComponent }
 ];
 
 @NgModule({
@@ -81,21 +83,18 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     Ng2CloudinaryModule,
     HttpClientModule,
+    MatExpansionModule,
     NgMatSearchBarModule,
     RouterModule.forRoot(
       appRoutes
       // { enableTracing: true }
     ),
     ReactiveFormsModule,
-    CloudinaryModule.forRoot(cloudinary, cloudinaryConfig),
+    // CloudinaryModule.forRoot(cloudinary, cloudinaryConfig),
     FileUploadModule
     // HttpHeaders
   ],
-  providers: [
-    ConfigService
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  providers: [ConfigService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
