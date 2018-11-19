@@ -8,12 +8,9 @@ module.exports.getAllAds = async (req, res) => {
 module.exports.search = async (req, res) => {
   console.log('asdfsdfdasfsd');
   const query = req.query.q;
-  let searchTerm = '';
-  if (query) {
-    searchTerm = query;
-  }
+
   res.status(200);
-  res.send(await adsModel.getAll(searchTerm));
+  res.send(await adsModel.getAll(query));
 };
 
 module.exports.getAd = async (req, res) => {
