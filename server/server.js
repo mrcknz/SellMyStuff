@@ -8,6 +8,11 @@ app
   .get('/ads', (req, res) => {
     controller.getAllAds(req, res);
   })
+
+  .get('/ads', (req, res) => {
+    controller.search(req, res);
+  })
+
   .get('/ads/:id', (req, res) => {
     controller.getAd(req, res);
   })

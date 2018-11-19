@@ -28,6 +28,12 @@ adsModel.getAll = async function() {
   return await adsModel.Ad.find().exec();
 };
 
+adsModel.search = async function(searchTerm) {
+  const q = await adsModel.Ad.find({ $text: { $title: searchTerm } }).exec();
+  console.log('test', q);
+  return q;
+};
+
 adsModel.getAd = async function(id) {
   return await adsModel.Ad.findOne({ _id: id }).exec();
 };
