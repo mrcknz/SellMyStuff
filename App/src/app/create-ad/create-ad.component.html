@@ -32,7 +32,7 @@
           required
         />
       </mat-form-field>
-      <div><button mat-button matStepperNext>Next</button></div>
+      <div><button mat-button matStepperNext type="button">Next</button></div>
     </mat-step>
     <mat-step [stepControl]="pictures">
       <ng-template matStepLabel>Pictures</ng-template>
@@ -40,8 +40,8 @@
         (uploaded)="onImageUpload($event)"
       ></app-picture-upload>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
       </div>
     </mat-step>
     <mat-step [stepControl]="location" optional>
@@ -56,8 +56,8 @@
         <input formControlName="postcode" matInput placeholder="Postcode" />
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
       </div>
     </mat-step>
     <mat-step [stepControl]="packaging" optional>
