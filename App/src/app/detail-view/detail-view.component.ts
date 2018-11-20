@@ -33,15 +33,16 @@ export class DetailViewComponent implements OnInit {
     console.warn(this.profileForm.value);
 
     this.buyerLocation = this.profileForm.value.address;
-    console.log('buyerad', this.buyerLocation);
+    console.log('ad', this.ad.width);
     this._dataService.getCountryCode(this.ad.country).subscribe(countryCode => {
+      console.log('countrycode', countryCode);
       this._dataService
         .getShipments(
           {
-            length: this.ad.length,
-            width: this.ad.width,
-            height: this.ad.height,
-            weight: this.ad.weight,
+            length: Number(this.ad.length),
+            width: Number(this.ad.width),
+            height: Number(this.ad.height),
+            weight: Number(this.ad.weight),
             country: countryCode,
             city: this.ad.city,
             postcode: this.ad.postcode
@@ -72,7 +73,6 @@ export class DetailViewComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getAd();
-    console.log('HELLO', this.id);
   }
 
   getAd() {
@@ -89,11 +89,11 @@ export class DetailViewComponent implements OnInit {
             // house_number: addressData.address.house_number
           }
         });
-        this._dataService
-          .getShipments(this.ad, addressData.address)
-          .subscribe(quoteData => {
-            this.quoteData = quoteData;
-          });
+        // this._dataService
+        //   .getShipments(this.ad, addressData.address)
+        //   .subscribe(quoteData => {
+        //     this.quoteData = quoteData;
+        //   });
       });
     });
   }

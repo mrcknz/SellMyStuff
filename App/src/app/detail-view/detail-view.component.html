@@ -13,6 +13,14 @@
       <i class="fas fa-map-marker-alt"></i>{{ '    ' }}{{ ad.city }},
       {{ ad.country }}
     </h4>
+    <button
+      mat-stroked-button
+      class="delete"
+      (click)="deleteAd()"
+      routerLinkActive="active"
+    >
+      Delete Ad
+    </button>
   </mat-card>
 
   <mat-accordion>
@@ -64,31 +72,27 @@
       </form>
     </mat-expansion-panel>
   </mat-accordion>
-
-  <!--
-    <mat-card>
-      <h3>Here are some shipping options for following package:</h3>
-      <div class="packageD">
-        weight: {{ quoteData.data.rates[0].charge_weight.value }}
-        {{ quoteData.data.rates[0].charge_weight.unit }}
-      </div>
-      <div class="packageD">
-        size: {{ ad.length }} x {{ ad.width }} x {{ ad.height }} cm
-      </div>
-      <div class="packageD">
-        to: {{ buyerLocation.city }}, {{ buyerLocation.country }}
-      </div>
-
-      <div *ngFor="let shipment of quoteData.data.rates">
-        <h5>
-          - {{ (shipment.total_charge.amount * 0.11).toFixed(2) }} EUR/ by:
-          {{ shipment.shipper_account.slug }} / via: {{ shipment.service_name }}
-        </h5>
-      </div>
-
-      <button class="delete" (click)="deleteAd()" routerLinkActive="active">
-        Delete Ad
-      </button>
-    </mat-card>
-  -->
 </div>
+<mat-card>
+  <!--
+    <h3>Here are some shipping options for following package:</h3>
+    <div class="packageD">
+      weight: {{ quoteData.data.rates[0].charge_weight.value }}
+      {{ quoteData.data.rates[0].charge_weight.unit }}
+    </div>
+    <div class="packageD">
+      size: {{ ad.length }} x {{ ad.width }} x {{ ad.height }} cm
+    </div>
+    <div class="packageD">
+      to: {{ buyerLocation.city }}, {{ buyerLocation.country }}
+    </div>
+  -->
+  <div *ngIf="quoteData && quoteData.data">
+    <div *ngFor="let shipment of quoteData.data.rates">
+      <h5>
+        {{ (shipment.total_charge.amount * 0.11).toFixed(2) }} EUR by
+        {{ shipment.shipper_account.slug }} {{ shipment.service_name }}
+      </h5>
+    </div>
+  </div>
+</mat-card>
