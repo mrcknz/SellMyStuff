@@ -13,14 +13,6 @@ import { Ad } from '../ad';
 })
 export class DetailViewComponent implements OnInit {
   step = 0;
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
   public id;
   ad = Ad;
   private sub: any;
@@ -38,9 +30,17 @@ export class DetailViewComponent implements OnInit {
     })
   });
 
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
   onSubmit() {
     this.buyerLocation = this.profileForm.value.address;
-    console.log('ad', this.ad.width);
+    console.log('ad', this.ad);
     this._dataService.getCountryCode(this.ad.country).subscribe((countryCode) => {
       console.log('countrycode', countryCode);
       this._dataService
