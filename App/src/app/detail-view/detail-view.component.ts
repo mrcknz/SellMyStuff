@@ -12,6 +12,15 @@ import { Ad } from '../ad';
   styleUrls: ['./detail-view.component.css']
 })
 export class DetailViewComponent implements OnInit {
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
   public id;
   ad = Ad;
   private sub: any;
