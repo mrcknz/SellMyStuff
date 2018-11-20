@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ConfigService } from '../config.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ad',
@@ -13,10 +12,11 @@ import { Router } from '@angular/router';
 export class CreateAdComponent implements OnInit {
   constructor(private service: ConfigService) {}
 
-  profileForm: FormGroup;
+  form: FormGroup;
+  pictureURL: string;
 
   ngOnInit() {
-    this.profileForm = new FormGroup({
+    this.form = new FormGroup({
       title: new FormControl(),
       price: new FormControl(),
       pictureURL: new FormControl(),
@@ -33,35 +33,36 @@ export class CreateAdComponent implements OnInit {
   }
 
   onImageUpload(pictureURL) {
-    this.profileForm.value.pictureURL = pictureURL;
+    this.pictureURL = pictureURL;
   }
 
   onSubmit() {
-    console.log(this.profileForm.value);
-    this.service.postAds(this.profileForm.value).subscribe((result) => {});
+    if (this.form.status === 'VALID') {
+      this.service.postAds({ ...this.form.value, pictureURL: this.pictureURL }).subscribe();
+    }
   }
 
   // onSubmit() {
-  //   console.warn(this.profileForm.value);
+  //   console.warn(this.form.value);
 
   //   this._dataService
   //     .postAds(
-  //       this.profileForm.value.itemDetails.price,
-  //       this.profileForm.value.itemDetails.title,
+  //       this.form.value.itemDetails.price,
+  //       this.form.value.itemDetails.title,
   //       this.date,
-  //       this.profileForm.value.username,
-  //       this.profileForm.value.itemDetails.description,
-  //       this.profileForm.value.itemDetails.pictureName,
+  //       this.form.value.username,
+  //       this.form.value.itemDetails.description,
+  //       this.form.value.itemDetails.pictureName,
 
-  //       this.profileForm.value.address.country,
-  //       this.profileForm.value.address.city,
-  //       this.profileForm.value.address.postcode,
-  //       this.profileForm.value.address.road,
-  //       this.profileForm.value.address.house_number,
-  //       this.profileForm.value.package.length,
-  //       this.profileForm.value.package.width,
-  //       this.profileForm.value.package.height,
-  //       this.profileForm.value.package.weight
+  //       this.form.value.address.country,
+  //       this.form.value.address.city,
+  //       this.form.value.address.postcode,
+  //       this.form.value.address.road,
+  //       this.form.value.address.house_number,
+  //       this.form.value.package.length,
+  //       this.form.value.package.width,
+  //       this.form.value.package.height,
+  //       this.form.value.package.weight
   //     )
   //     .subscribe(statusPostAd => {
   //       this.statusPostAd = statusPostAd;
@@ -76,7 +77,7 @@ export class CreateAdComponent implements OnInit {
 
   // this._dataService.getAddress().subscribe(addressData => {
   //   this.addressData = addressData;
-  //   this.profileForm.patchValue({
+  //   this.form.patchValue({
   //     address: {
   //       road: addressData.address.road,
   //       house_number: addressData.address.house_number,
