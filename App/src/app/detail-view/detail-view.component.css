@@ -1,8 +1,16 @@
 i {
   margin-left: 15px;
+  font-size: 30px;
+  color: grey;
+  /* margin: 20px; */
 }
 
 .detail-view {
   display: flex;
   flex-direction: column;
+}
+
+.buttons {
+  margin: 10px;
+  padding: 10px;
 }

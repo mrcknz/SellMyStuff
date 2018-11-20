@@ -9,124 +9,119 @@
     <mat-card-title>{{ ad.title }}</mat-card-title>
 
     <p class="description">{{ ad.description }}</p>
-    <h4 class="location">
+    <h5 class="location">
       <i class="fas fa-map-marker-alt"></i>{{ '    ' }}{{ ad.city }},
-      {{ ad.country }}
-    </h4>
+      {{ ad.country }}, {{ ad.postcode }}
+    </h5>
 
-    <button
-      mat-stroked-button
-      class="delete"
-      (click)="deleteAd()"
-      routerLink="/"
-      routerLinkActive="active"
-    >
-      Delete Ad
-    </button>
+    <div #gmap style="width:100%;height:200px"></div>
+    <!-- <div class="buttons"> -->
+    <!--
+      <button
+        mat-stroked-button
+        class="delete"
+        (click)="deleteAd()"
+        routerLink="/"
+        routerLinkActive="active"
+      >
+        Delete Ad
+      </button>
+    -->
 
-    <button
-      mat-stroked-button
-      class="ship"
-      routerLink=":id/ship"
-      routerLinkActive="active"
-    >
-      Shipping Quote
-    </button>
+    <!-- </div> -->
+  </mat-card>
+  <div *ngIf="!quoteData">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Get a shipping estimate </mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <button
-      mat-stroked-button
-      class="ship"
-      routerLink=":id/ship"
-      routerLinkActive="active"
-    >
-      Contact
-    </button>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div formGroupName="address" class="form">
+            <mat-form-field>
+              <input
+                class="field"
+                matInput
+                placeholder="City"
+                type="text"
+                formControlName="city"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                class="field"
+                matInput
+                placeholder="Postcode"
+                type="text"
+                formControlName="postcode"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                class="field"
+                matInput
+                placeholder="Country"
+                type="text"
+                formControlName="country"
+              />
+            </mat-form-field>
+
+            <button
+              mat-stroked-button
+              type="submit"
+              [disabled]="!profileForm.valid"
+              (click)="nextStep()"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <!-- <ng-template #shippingCosts> -->
+  <mat-card>
+    <div *ngIf="quoteData && quoteData.data">
+      <h4>Cheapest Shipping Option</h4>
+      <p>
+        <i class="fas fa-shipping-fast"></i>
+        {{
+          (quoteData.data.rates[0].total_charge.amount * 0.11).toFixed(2)
+        }}
+        EUR by {{ quoteData.data.rates[0].shipper_account.slug }}
+        {{ quoteData.data.rates[0].service_name }}
+      </p>
+
+      <!-- <i class="fas fa-shipping-fast"></i> -->
+
+      <h5>More Options</h5>
+      <div *ngFor="let shipment of quoteData.data.rates">
+        <p>
+          {{ (shipment.total_charge.amount * 0.11).toFixed(2) }} EUR by
+          {{ shipment.shipper_account.slug }} {{ shipment.service_name }}
+        </p>
+      </div>
+    </div>
   </mat-card>
 
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Get a shipping estimate </mat-panel-title>
-      </mat-expansion-panel-header>
+  <!--
+    <h3>Here are some shipping options for following package:</h3>
+    <div class="packageD">
+      weight: {{ quoteData.data.rates[0].charge_weight.value }}
+      {{ quoteData.data.rates[0].charge_weight.unit }}
+    </div>
+    <div class="packageD">
+      size: {{ ad.length }} x {{ ad.width }} x {{ ad.height }} cm
+    </div>
+    <div class="packageD">
+      to: {{ buyerLocation.city }}, {{ buyerLocation.country }}
+    </div>
+  -->
 
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div formGroupName="address" class="form">
-          <mat-form-field>
-            <input
-              class="field"
-              matInput
-              placeholder="City"
-              type="text"
-              formControlName="city"
-            />
-          </mat-form-field>
-
-          <mat-form-field>
-            <input
-              class="field"
-              matInput
-              placeholder="Postcode"
-              type="text"
-              formControlName="postcode"
-            />
-          </mat-form-field>
-
-          <mat-form-field>
-            <input
-              class="field"
-              matInput
-              placeholder="Country"
-              type="text"
-              formControlName="country"
-            />
-          </mat-form-field>
-
-          <button
-            mat-stroked-button
-            type="submit"
-            [disabled]="!profileForm.valid"
-            (click)="nextStep()"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel
-      [expanded]="step === 1"
-      (opened)="setStep(1)"
-      hideToggle
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-description>Shipping Costs </mat-panel-description>
-        <!-- <mat-panel-title> Shipping Costs </mat-panel-title> -->
-      </mat-expansion-panel-header>
-
-      <div *ngIf="quoteData && quoteData.data">
-        <div *ngFor="let shipment of quoteData.data.rates">
-          <p>
-            {{ (shipment.total_charge.amount * 0.11).toFixed(2) }} EUR by
-            {{ shipment.shipper_account.slug }} {{ shipment.service_name }}
-          </p>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+  <!-- </mat-card> -->
+  <!-- </ng-template> -->
 </div>
-<!-- <mat-card> -->
-<!--
-  <h3>Here are some shipping options for following package:</h3>
-  <div class="packageD">
-    weight: {{ quoteData.data.rates[0].charge_weight.value }}
-    {{ quoteData.data.rates[0].charge_weight.unit }}
-  </div>
-  <div class="packageD">
-    size: {{ ad.length }} x {{ ad.width }} x {{ ad.height }} cm
-  </div>
-  <div class="packageD">
-    to: {{ buyerLocation.city }}, {{ buyerLocation.country }}
-  </div>
--->
-
-<!-- </mat-card> -->
