@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const config = require('./config').db;
 
-mongoose.connect('mongodb://localhost/ads', { useNewUrlParser: true });
+mongoose.connect(config.urlString, config.options);
 const adsModel = {};
 
 adsModel.Ad = mongoose.model('Ad', {
@@ -27,7 +28,6 @@ adsModel.getAll = async function() {
 
 adsModel.search = async function(searchTerm) {
   const res = await adsModel.Ad.find({ $text: { $search: searchTerm } }).exec();
-  console.log('test', res);
   return res;
 };
 
