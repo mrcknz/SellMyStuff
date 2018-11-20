@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config.service';
-import { Subscriber } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Ad } from '../ad';
 
 @Component({
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
-  styleUrls: ['./detail-view.component.css']
+  styleUrls: [
+    './detail-view.component.css'
+  ]
 })
 export class DetailViewComponent implements OnInit {
   public id;
@@ -30,11 +30,9 @@ export class DetailViewComponent implements OnInit {
   });
 
   onSubmit() {
-    console.warn(this.profileForm.value);
-
     this.buyerLocation = this.profileForm.value.address;
     console.log('ad', this.ad.width);
-    this._dataService.getCountryCode(this.ad.country).subscribe(countryCode => {
+    this._dataService.getCountryCode(this.ad.country).subscribe((countryCode) => {
       console.log('countrycode', countryCode);
       this._dataService
         .getShipments(
@@ -57,18 +55,14 @@ export class DetailViewComponent implements OnInit {
             // house_number: this.profileForm.value.address.house_number
           }
         )
-        .subscribe(quoteData => {
+        .subscribe((quoteData) => {
           console.log('quote', quoteData);
           this.quoteData = quoteData;
         });
     });
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private _dataService: ConfigService,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private _dataService: ConfigService, private router: Router) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -76,9 +70,9 @@ export class DetailViewComponent implements OnInit {
   }
 
   getAd() {
-    this._dataService.getAd(this.id).subscribe(data => {
+    this._dataService.getAd(this.id).subscribe((data) => {
       this.ad = data;
-      this._dataService.getAddress().subscribe(addressData => {
+      this._dataService.getAddress().subscribe((addressData) => {
         this.buyerLocation = addressData.address;
         this.profileForm.patchValue({
           address: {
@@ -99,12 +93,10 @@ export class DetailViewComponent implements OnInit {
   }
 
   deleteAd() {
-    this._dataService.deleteAd(this.id).subscribe(res => {
-      if (res.command === 'DELETE') {
-        this.router.navigate(['/']);
-      }
-      console.log(res);
-    });
+    this._dataService.deleteAd(this.id);
+    this.router.navigate([
+      '/'
+    ]);
   }
 
   //   this._dataService.getAddress().subscribe((addressData) => {

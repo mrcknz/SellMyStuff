@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ConfigService } from '../config.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ad',
@@ -36,34 +37,9 @@ export class CreateAdComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.postAds(this.profileForm.value).subscribe((err) => {
-      if (err) {
-        throw new Error('Error storing ad in DB');
-      }
-    });
+    console.log(this.profileForm.value);
+    this.service.postAds(this.profileForm.value).subscribe((result) => {});
   }
-
-  // upload() {
-  //   this.loading = true;
-  //   this.uploader.uploadAll();
-  //   this.uploader.onSuccessItem = (
-  //     item: any,
-  //     response: string,
-  //     status: number,
-  //     headers: any
-  //   ): any => {
-  //     let res: any = JSON.parse(response);
-  //     console.log(res);
-  //     this.profileForm.patchValue({
-  //       itemDetails: {
-  //         pictureName: res.secure_url
-  //       }
-  //     });
-  //   };
-  //   this.uploader.onErrorItem = function(fileItem, response, status, headers) {
-  //     console.info('onErrorItem', fileItem, response, status, headers);
-  //   };
-  // }
 
   // onSubmit() {
   //   console.warn(this.profileForm.value);

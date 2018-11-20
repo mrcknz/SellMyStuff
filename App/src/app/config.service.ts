@@ -10,12 +10,12 @@ import { Ad } from './ad';
 })
 export class ConfigService {
   private pos = { lat: 0, lon: 0 };
-  private apiUrl = 'http://localhost:3000/adsData';
+  private apiUrl = 'http://localhost:3000/ads';
 
   constructor(private http: HttpClient) {}
 
   getAds(): Observable<any> {
-    return this.http.get('http://localhost:3000/ads');
+    return this.http.get(this.apiUrl);
 
     // return Observable.create(observer=> {
     //   this.http.get('http://localhost:3000').subscribe(res => {observer.next(res)})
@@ -27,7 +27,7 @@ export class ConfigService {
   }
 
   postAds(ad): Observable<any> {
-    return this.http.post('http://localhost:3000/ads', ad, {
+    return this.http.post(this.apiUrl, ad, {
       headers: new HttpHeaders({
         'content-type': 'application/json'
       })
@@ -53,15 +53,13 @@ export class ConfigService {
   //   });
   // }
 
-  // getCountryCode(country): Observable<any> {
-  //   return Observable.create(observer => {
-  //     this.http
-  //       .get(`https://restcountries.eu/rest/v2/name/${country}`)
-  //       .subscribe(res => {
-  //         observer.next(res[0].alpha3Code);
-  //       });
-  //   });
-  // }
+  getCountryCode(country): Observable<any> {
+    return Observable.create((observer) => {
+      this.http.get(`https://restcountries.eu/rest/v2/name/${country}`).subscribe((res) => {
+        observer.next(res[0].alpha3Code);
+      });
+    });
+  }
 
   // getSelectedAd(): Observable<any> {
   //   return Observable.create(observer => {
@@ -156,12 +154,12 @@ export class ConfigService {
   //     console.warn(`ERROR(${err.code}): ${err.message}`);
   //   }
 
-  deleteAd(id): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteAd(id) {
+    return this.http.delete(`${this.apiUrl}/${id}`).subscribe();
   }
 
   getLocation() {
-    var options = {
+    const options = {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0

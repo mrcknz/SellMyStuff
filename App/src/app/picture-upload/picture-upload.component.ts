@@ -18,6 +18,7 @@ export class PictureUploadComponent implements OnInit {
   private hasBaseDropZoneOver = false;
   private uploader: FileUploader;
   private title: string;
+  private pictureURL: string;
 
   constructor(private cloudinary: Cloudinary, private zone: NgZone, private http: HttpClient) {
     this.responses = [];
@@ -92,7 +93,8 @@ export class PictureUploadComponent implements OnInit {
         }
       });
       if (this.responses[0].status === 200) {
-        this.uploaded.emit(this.responses[0].data.secure_url);
+        this.pictureURL = this.responses[0].data.secure_url;
+        this.uploaded.emit(this.pictureURL);
       }
     };
 

@@ -23,8 +23,6 @@ export class AdsListComponent implements OnInit {
   }
 
   getAds() {
-    console.log('adsdata', this.adsData);
-    console.log('testdata', this._dataService);
     this._dataService.getAds().subscribe((data) => {
       this.adsData = data;
     });
