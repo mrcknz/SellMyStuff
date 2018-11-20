@@ -12,3 +12,6 @@
   align-items: center;
   padding: 5px;
 }
+.mat-button .details {
+  justify-self: center;
+}

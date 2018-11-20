@@ -47,7 +47,9 @@ const appRoutes: Routes = [
   { path: '', component: AdsListComponent },
   { path: 'newad', component: CreateAdComponent },
   // { path: 'details/:date', component: DetailViewComponent }
-  { path: ':id', component: DetailViewComponent }
+  { path: ':id', component: DetailViewComponent },
+  { path: ':id/ship', component: DetailViewComponent },
+  { path: ':id/contact', component: DetailViewComponent }
 ];
 
 @NgModule({
@@ -94,11 +96,7 @@ const appRoutes: Routes = [
     FileUploadModule
     // HttpHeaders
   ],
-  providers: [
-    ConfigService
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  providers: [ConfigService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
