@@ -87,22 +87,7 @@ export class ConfigService {
   }
 
   deleteAd(id): Observable<any> {
-    return Observable.create(observer => {
-      this.http
-        .post(
-          `http://localhost:3000/deletead`,
-          { id: `${id}` },
-
-          {
-            headers: new HttpHeaders({
-              'content-type': 'application/json'
-            })
-          }
-        )
-        .subscribe(res => {
-          observer.next(res);
-        });
-    });
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   getLocation() {
