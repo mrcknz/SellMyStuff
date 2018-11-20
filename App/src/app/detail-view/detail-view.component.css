@@ -15,7 +15,32 @@ i {
   margin: 10px;
   padding: 10px;
 }
+.mat-card-title,
+h4 {
+  color: #464646;
+}
 
 .mat-expansion-panel-header {
-  padding: 0, 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #464646;
+}
+
+.mat-expansion-panel-header-title {
+  font-size: 18px;
+}
+
+.contact {
+  width: 100%;
+}
+
+.mat-expansion-panel,
+.mat-accordion,
+.mat-expansion-panel-header,
+.mat-card {
+  background-color: lightgrey;
 }

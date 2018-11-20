@@ -11,10 +11,10 @@
     <p class="description">{{ ad.description }}</p>
     <p>Dimensions {{ ad.length }} x {{ ad.width }} x {{ ad.height }} cm</p>
 
-    <h5 class="location">
+    <h4 class="location">
       <i class="fas fa-map-marker-alt"></i>{{ '    ' }}{{ ad.city }},
       {{ ad.country }}, {{ ad.postcode }}
-    </h5>
+    </h4>
 
     <div #gmap style="width:100%;height:200px"></div>
     <!-- <div class="buttons"> -->
@@ -111,12 +111,11 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <i class="fas fa-shipping-fast"></i>
-          {{
+          <i class="fas fa-shipping-fast"></i> {{ '    '
+          }}{{
             (quoteData.data.rates[0].total_charge.amount * 0.11).toFixed(2)
           }}
-          EUR by {{ quoteData.data.rates[0].shipper_account.slug }}
-          {{ quoteData.data.rates[0].service_name }}</mat-panel-title
+          EUR</mat-panel-title
         >
       </mat-expansion-panel-header>
       <!-- <h5>More Options</h5> -->
@@ -126,6 +125,7 @@
           {{ shipment.shipper_account.slug }} {{ shipment.service_name }}
         </p>
       </div>
+      <button class="contact" mat-stroked-button>Contact Owner</button>
     </mat-expansion-panel>
   </mat-accordion>
   <!-- </div> -->
