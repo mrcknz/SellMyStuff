@@ -1,27 +1,35 @@
-const Ads = require('./model');
-
-module.exports.createAd = async (req, res) => {
-	const ads = await Ads.create(req.body);
-	res.status(201).send(ads.rows[0]);
-};
-
-module.exports.deleteAd = async (req, res) => {
-	try {
-		const result = await Ads.delete(req.params.id);
-		if (result.rowCount) res.status(200).end();
-		else res.status(404).end();
-	} catch (err) {
-		res.status(500).end();
-	}
-};
+const adsModel = require('./model');
 
 module.exports.getAllAds = async (req, res) => {
-	const ads = await Ads.getAll();
-	res.status(200).send(ads.rows);
+  res.status(200);
+  res.send(await adsModel.getAll());
+};
+
+module.exports.search = async (req, res) => {
+  const query = req.query.q;
+
+  res.status(200);
+  res.send(await adsModel.search(query));
 };
 
 module.exports.getAd = async (req, res) => {
-	const ads = await Ads.getOne(req.params.id);
-	if (ads.rows.length) res.status(200).send(ads.rows[0]);
-	else res.status(404).end();
+  res.status(200);
+  res.send(await adsModel.getAd(req.params.id));
+  res.end();
+};
+
+module.exports.createAd = async (req, res) => {
+  await adsModel.create(req.body);
+  res.status(201);
+  res.send(await adsModel.getAll());
+};
+
+module.exports.deleteAd = async (req, res) => {
+  try {
+    const result = await adsModel.delete(req.params.id);
+    if (result) res.status(200).end();
+    else res.status(404).end();
+  } catch (err) {
+    res.status(500).end();
+  }
 };
