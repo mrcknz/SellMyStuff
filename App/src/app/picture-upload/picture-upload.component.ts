@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input, Output, NgZone } from '@angular/core';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { HttpClient } from '@angular/common/http';
 import { Cloudinary } from '@cloudinary/angular-5.x';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-picture-upload',
@@ -12,6 +13,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 })
 export class PictureUploadComponent implements OnInit {
   @Input() responses: Array<any>;
+  @Output() uploaded = new EventEmitter<string>();
 
   private hasBaseDropZoneOver = false;
   private uploader: FileUploader;
@@ -89,23 +91,28 @@ export class PictureUploadComponent implements OnInit {
           this.responses.push(fileItem);
         }
       });
+      if (this.responses[0].status === 200) {
+        this.uploaded.emit(this.responses[0].data.secure_url);
+      }
     };
 
     // Update model on completion of uploading a file
-    this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
+    this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
       upsertResponse({
         file: item.file,
         status,
         data: JSON.parse(response)
       });
+    };
 
     // Update model on upload progress event
-    this.uploader.onProgressItem = (fileItem: any, progress: any) =>
+    this.uploader.onProgressItem = (fileItem: any, progress: any) => {
       upsertResponse({
         file: fileItem.file,
         progress,
         data: {}
       });
+    };
   }
 
   updateTitle(value: string) {

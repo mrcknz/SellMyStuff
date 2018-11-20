@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ConfigService } from '../config.service';
-import { Subscriber } from 'rxjs';
-import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
-import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ad',
@@ -15,7 +10,7 @@ import { Router } from '@angular/router';
   ]
 })
 export class CreateAdComponent implements OnInit {
-  constructor(private dataService: ConfigService) {}
+  constructor(private service: ConfigService) {}
 
   profileForm: FormGroup;
 
@@ -23,7 +18,7 @@ export class CreateAdComponent implements OnInit {
     this.profileForm = new FormGroup({
       title: new FormControl(),
       price: new FormControl(),
-      pictureName: new FormControl(),
+      pictureURL: new FormControl(),
       description: new FormControl(),
       length: new FormControl(),
       width: new FormControl(),
@@ -36,8 +31,16 @@ export class CreateAdComponent implements OnInit {
     });
   }
 
+  onImageUpload(pictureURL) {
+    this.profileForm.value.pictureURL = pictureURL;
+  }
+
   onSubmit() {
-    console.log('title', this.profileForm);
+    this.service.postAds(this.profileForm.value).subscribe((err) => {
+      if (err) {
+        throw new Error('Error storing ad in DB');
+      }
+    });
   }
 
   // upload() {

@@ -17,7 +17,7 @@
     </mat-step>
     <mat-step [stepControl]="pictures">
       <ng-template matStepLabel>Pictures</ng-template>
-      <app-picture-upload></app-picture-upload>
+      <app-picture-upload (uploaded)="onImageUpload($event)"></app-picture-upload>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>

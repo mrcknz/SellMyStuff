@@ -15,7 +15,7 @@ export class ConfigService {
   constructor(private http: HttpClient) {}
 
   getAds(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get('http://localhost:3000/ads');
 
     // return Observable.create(observer=> {
     //   this.http.get('http://localhost:3000').subscribe(res => {observer.next(res)})
@@ -27,7 +27,7 @@ export class ConfigService {
   }
 
   postAds(ad): Observable<any> {
-    return this.http.post('http://localhost:3000/', ad, {
+    return this.http.post('http://localhost:3000/ads', ad, {
       headers: new HttpHeaders({
         'content-type': 'application/json'
       })
@@ -53,38 +53,108 @@ export class ConfigService {
   //   });
   // }
 
-  uploadFile(file): Observable<any> {
-    return Observable.create(observer => {
-      this.http
-        .post(
-          `https://api.cloudinary.com/v1_1/cjrrcrosr/image/upload`,
-          {
-            file: file,
-            upload_preset: 'ynqkvkei'
-          },
-          {
-            headers: new HttpHeaders({
-              'content-type': 'application/json'
-            })
-          }
-        )
-        .subscribe(res => {
-          observer.next(res);
-        });
-    });
-  }
+  // getCountryCode(country): Observable<any> {
+  //   return Observable.create(observer => {
+  //     this.http
+  //       .get(`https://restcountries.eu/rest/v2/name/${country}`)
+  //       .subscribe(res => {
+  //         observer.next(res[0].alpha3Code);
+  //       });
+  //   });
+  // }
 
-  getCountryCode(country): Observable<any> {
-    console.log('country', country);
-    return Observable.create(observer => {
-      this.http
-        .get(`https://restcountries.eu/rest/v2/name/${country}`)
-        .subscribe(res => {
-          console.log('res', res);
-          observer.next(res[0].alpha3Code);
-        });
-    });
-  }
+  // getSelectedAd(): Observable<any> {
+  //   return Observable.create(observer => {
+  //     this.http.get(`http://localhost:3000/`).subscribe(res => {
+  //       observer.next(res);
+  //     });
+  //   });
+  // }
+
+  // postAds(
+  //  price,
+  //           title,
+  //           date,
+  //           username,
+  //           description,
+  //           pictureName,
+  //           lat,
+  //           lon,
+  //           country,
+  //           city,
+  //           postcode,
+  //           road,
+  //           house_number,
+  //           length,
+  //           width,
+  //           height,
+  //           weight
+  // ): Observable<any> {
+  //   return Observable.create(observer => {
+  //     this.http
+  //       .post(
+  //         `http://localhost:3000/createad`,
+  //         {
+  //           price: `${price}`,
+  //           title: `${title}`,
+  //           date: `${date}`,
+  //           username: `${username}`,
+  //           description: `${description}`,
+  //           pictureName: `${pictureName}`,
+  //           lat: `${lat}`,
+  //           lon: `${lon}`,
+  //           country: `${country}`,
+  //           city: `${city}`,
+  //           postcode: `${postcode}`,
+  //           road: `${road}`,
+  //           house_number: `${house_number}`,
+  //           length: `${length}`,
+  //           width: `${width}`,
+  //           height: `${height}`,
+  //           weight: `${weight}`
+  //         },
+
+  //         {
+  //           headers: new HttpHeaders({
+  //             'content-type': 'application/json'
+  //           })
+  //         }
+  //       )
+  //       .subscribe(res => {
+  //         observer.next(res);
+  //       });
+  //   });
+  // }
+
+  // deleteAd(date): Observable<any> {
+  //   return Observable.create(observer => {
+  //     this.http
+  //       .post(
+  //         `http://localhost:3000/deletead`,
+  //         { date: `${date}` },
+
+  //         {
+  //           headers: new HttpHeaders({
+  //             'content-type': 'application/json'
+  //           })
+  //         }
+  //       )
+  //       .subscribe(res => {
+  //         observer.next(res);
+  //       });
+  //   });
+  // }
+
+  // getLocation() {
+  //   var options = {
+  //     enableHighAccuracy: true,
+  //     timeout: 5000,
+  //     maximumAge: 0
+  //   };
+
+  //   function error(err) {
+  //     console.warn(`ERROR(${err.code}): ${err.message}`);
+  //   }
 
   deleteAd(id): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
@@ -102,7 +172,7 @@ export class ConfigService {
     }
 
     navigator.geolocation.getCurrentPosition(
-      data => {
+      (data) => {
         this.pos.lat = data.coords.latitude;
         this.pos.lon = data.coords.longitude;
       },
@@ -113,20 +183,19 @@ export class ConfigService {
   }
 
   getAddress(): Observable<any> {
-    return Observable.create(observer => {
+    return Observable.create((observer) => {
       navigator.geolocation.getCurrentPosition(
-        data => {
+        (data) => {
           this.http
             .get<Address>(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${
-                data.coords.latitude
-              }&lon=${data.coords.longitude}`
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${data.coords.latitude}&lon=${data.coords
+                .longitude}`
             )
-            .subscribe(res => {
+            .subscribe((res) => {
               observer.next(res);
             });
         },
-        error => {
+        (error) => {
           observer.error(error);
         }
       );
@@ -223,8 +292,8 @@ export class ConfigService {
   getShipments(addData, buyerLocation): Observable<any> {
     console.log('weight', typeof addData.weight);
 
-    return Observable.create(observer => {
-      this.getAddress().subscribe(addressData => {
+    return Observable.create((observer) => {
+      this.getAddress().subscribe((addressData) => {
         // this.http
         //   .get(`https://restcountries.eu/rest/v2/name/${buyerLocation.country}`)
         //   .subscribe(countryData => {
@@ -232,7 +301,6 @@ export class ConfigService {
         this.http
           .post(
             `https://sandbox-api.postmen.com/v3/rates`,
-
             {
               async: false,
               shipper_accounts: [
@@ -292,7 +360,6 @@ export class ConfigService {
                 }
               }
             },
-
             {
               headers: new HttpHeaders({
                 'content-type': 'application/json',
@@ -300,7 +367,7 @@ export class ConfigService {
               })
             }
           )
-          .subscribe(data => observer.next(data));
+          .subscribe((data) => observer.next(data));
         // );
       });
     });
