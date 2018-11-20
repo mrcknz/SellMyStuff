@@ -8,18 +8,14 @@ adsModel.Ad = mongoose.model('Ad', {
   title       : { type: String, text: true },
   price       : Number,
   description : String,
-  image       : String,
+  pictureURL  : String,
   length      : Number,
   width       : Number,
   height      : Number,
-  Weight      : Number,
-  houseNumber : Number,
-  street      : String,
+  weight      : Number,
   postcode    : String,
   city        : String,
-  country     : String,
-  lat         : Number,
-  long        : Number
+  country     : String
 });
 
 adsModel.getAll = async function() {
@@ -40,24 +36,20 @@ adsModel.create = async function(ad) {
     title       : '',
     price       : '',
     description : '',
-    image       : '',
+    pictureURL  : '',
     length      : '',
     width       : '',
     height      : '',
-    Weight      : '',
-    houseNumber : '',
-    street      : '',
+    weight      : '',
     postcode    : '',
     city        : '',
-    country     : '',
-    lat         : '',
-    long        : ''
+    country     : ''
   };
   return await adsModel.Ad.create(Object.assign(newAd, ad));
 };
 
 adsModel.delete = async function(id) {
-  await adsModel.Ad.deleteOne({ _id: id });
+  return await adsModel.Ad.deleteOne({ _id: id });
 };
 
 module.exports = adsModel;

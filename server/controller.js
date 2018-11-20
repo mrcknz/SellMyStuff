@@ -27,7 +27,7 @@ module.exports.createAd = async (req, res) => {
 module.exports.deleteAd = async (req, res) => {
   try {
     const result = await adsModel.delete(req.params.id);
-    if (result) res.status(200).end();
+    if (result.n === result.ok) res.status(200).end();
     else res.status(404).end();
   } catch (err) {
     res.status(500).end();
