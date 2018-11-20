@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Address } from './Address';
-import { Observable, Subject } from 'rxjs';
-import { AppComponent } from './app.component';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Ad } from './ad';
 
 @Injectable({
@@ -11,6 +10,7 @@ import { Ad } from './ad';
 export class ConfigService {
   private pos = { lat: 0, lon: 0 };
   private apiUrl = 'http://localhost:3000/ads';
+  private searchResults = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +20,16 @@ export class ConfigService {
     // return Observable.create(observer=> {
     //   this.http.get('http://localhost:3000').subscribe(res => {observer.next(res)})
     // })
+  }
+
+  getSearchResults$(): Observable<any> {
+    return this.searchResults.asObservable();
+  }
+
+  search(queryString: string): void {
+    this.http.get(`${this.apiUrl}/search/?q=${queryString}`).subscribe((response) => {
+      this.searchResults.next(response);
+    });
   }
 
   getAd(id): Observable<any> {

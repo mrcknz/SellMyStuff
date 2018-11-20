@@ -1,12 +1,10 @@
 <mat-toolbar class="nav-bar" color="primary">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon class="menu">menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/newad" routerLinkActive="active">
-      Post an Ad
-    </button>
-    <button mat-menu-item>Logout</button>
-  </mat-menu>
-  <input matInput type="text" placeholder="🔍" [(ngModel)]="value">
+      <!-- <mat-input class="nav-bar" color="primary"> -->
+        <app-search></app-search>
+        <!-- <input id="search" matInput type="text" placeholder="🔍" [(ngModel)]="value"> -->
+        <!-- <mat-form-field id="search" appearance="legacy">
+          <input matInput>
+          <div matPrefix>🔍</div>
+        </mat-form-field> -->
+
 </mat-toolbar>

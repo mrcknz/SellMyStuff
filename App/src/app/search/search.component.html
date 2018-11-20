@@ -1,0 +1,4 @@
+<div>
+  <span>🔍</span>
+  <input matInput id="search" [formControl]="queryField" type="text" (keyup)="getSearchResults($event.target.value)">
+</div>
