@@ -9,6 +9,8 @@
     <mat-card-title>{{ ad.title }}</mat-card-title>
 
     <p class="description">{{ ad.description }}</p>
+    <p>Dimensions {{ ad.length }} x {{ ad.width }} x {{ ad.height }} cm</p>
+
     <h5 class="location">
       <i class="fas fa-map-marker-alt"></i>{{ '    ' }}{{ ad.city }},
       {{ ad.country }}, {{ ad.postcode }}
@@ -77,6 +79,13 @@
             >
               Submit
             </button>
+            <!-- <img *ngIf="displaySpinner" src="truck.gif" /> -->
+
+            <mat-spinner
+              *ngIf="displaySpinner"
+              [diameter]="60"
+              [color]="'#A9A9A9'"
+            ></mat-spinner>
           </div>
         </form>
       </mat-expansion-panel>
@@ -84,29 +93,43 @@
   </div>
 
   <!-- <ng-template #shippingCosts> -->
-  <mat-card>
-    <div *ngIf="quoteData && quoteData.data">
-      <h4>Cheapest Shipping Option</h4>
-      <p>
-        <i class="fas fa-shipping-fast"></i>
-        {{
-          (quoteData.data.rates[0].total_charge.amount * 0.11).toFixed(2)
-        }}
-        EUR by {{ quoteData.data.rates[0].shipper_account.slug }}
-        {{ quoteData.data.rates[0].service_name }}
-      </p>
+  <!-- <mat-card> -->
+  <!-- <div *ngIf="quoteData && quoteData.data"> -->
+  <!--
+    <h4>Cheapest Shipping Option</h4>
+    <p>
+      <i class="fas fa-shipping-fast"></i>
+      {{
+        (quoteData.data.rates[0].total_charge.amount * 0.11).toFixed(2)
+      }}
+      EUR by {{ quoteData.data.rates[0].shipper_account.slug }}
+      {{ quoteData.data.rates[0].service_name }}
+    </p>
+  -->
 
-      <!-- <i class="fas fa-shipping-fast"></i> -->
-
-      <h5>More Options</h5>
+  <mat-accordion *ngIf="quoteData && quoteData.data">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <i class="fas fa-shipping-fast"></i>
+          {{
+            (quoteData.data.rates[0].total_charge.amount * 0.11).toFixed(2)
+          }}
+          EUR by {{ quoteData.data.rates[0].shipper_account.slug }}
+          {{ quoteData.data.rates[0].service_name }}</mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <!-- <h5>More Options</h5> -->
       <div *ngFor="let shipment of quoteData.data.rates">
         <p>
           {{ (shipment.total_charge.amount * 0.11).toFixed(2) }} EUR by
           {{ shipment.shipper_account.slug }} {{ shipment.service_name }}
         </p>
       </div>
-    </div>
-  </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!-- </div> -->
+  <!-- </mat-card> -->
 
   <!--
     <h3>Here are some shipping options for following package:</h3>

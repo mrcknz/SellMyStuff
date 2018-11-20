@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Ad } from '../ad';
 import { ViewChild } from '@angular/core';
 import {} from '@types/googlemaps';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-detail-view',
@@ -12,6 +13,9 @@ import {} from '@types/googlemaps';
   styleUrls: ['./detail-view.component.css']
 })
 export class DetailViewComponent implements OnInit {
+  loading = true;
+  public displaySpinner: boolean;
+  private spinnerService: Ng4LoadingSpinnerService;
   step = 0;
   public id;
   ad = Ad;
@@ -37,7 +41,8 @@ export class DetailViewComponent implements OnInit {
   }
 
   nextStep() {
-    this.step++;
+    console.log('sfasfsfasdfssdf');
+    this.displaySpinner = true;
   }
 
   onSubmit() {
@@ -66,6 +71,7 @@ export class DetailViewComponent implements OnInit {
         )
         .subscribe(quoteData => {
           this.quoteData = quoteData;
+          this.displaySpinner = false;
         });
     });
   }

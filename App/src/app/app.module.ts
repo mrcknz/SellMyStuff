@@ -19,7 +19,8 @@ import {
   MatSidenavModule,
   MatStepperModule,
   MatAutocompleteModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatExpansionModule,
     NgMatSearchBarModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(
       appRoutes
       // { enableTracing: true }
