@@ -6,7 +6,6 @@ module.exports.getAllAds = async (req, res) => {
 };
 
 module.exports.search = async (req, res) => {
-  console.log('asdfsdfdasfsd');
   const query = req.query.q;
 
   res.status(200);
