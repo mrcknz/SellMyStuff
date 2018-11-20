@@ -1,0 +1,14 @@
+.mat-card,
+.ad-card {
+  max-width: 400px;
+}
+
+.avatar {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.mat-card-header {
+  align-items: center;
+  padding: 5px;
+}
