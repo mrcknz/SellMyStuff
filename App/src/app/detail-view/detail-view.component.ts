@@ -14,7 +14,7 @@ import { Ad } from '../ad';
 export class DetailViewComponent implements OnInit {
   step = 0;
   public id;
-  ad = Ad;
+  ad: Ad;
   private sub: any;
   // private ad;
   private buyerLocation;

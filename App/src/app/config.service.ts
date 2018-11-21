@@ -22,12 +22,13 @@ export class ConfigService {
     // })
   }
 
-  getSearchResults$(): Observable<any> {
+  getSearchResults$(): Observable<any[]> {
     return this.searchResults.asObservable();
   }
 
-  search(queryString: string): void {
-    this.http.get(`${this.apiUrl}/search/?q=${queryString}`).subscribe((response) => {
+  search(queryString: string) {
+    this.http.get(`${this.apiUrl}/search/?q=${queryString}`).subscribe((response: Ad[]): void => {
+      console.log('response', response);
       this.searchResults.next(response);
     });
   }
@@ -37,11 +38,13 @@ export class ConfigService {
   }
 
   postAds(ad): Observable<any> {
-    return this.http.post(this.apiUrl, ad, {
+    const response = this.http.post(this.apiUrl, ad, {
       headers: new HttpHeaders({
         'content-type': 'application/json'
       })
     });
+    response.subscribe((res) => console.log(res));
+    return response;
   }
 
   // searchAds(searchTerm): Observable<any> {
