@@ -34,7 +34,8 @@ import {
   MatInputModule,
   MatStepperModule,
   MatAutocompleteModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { SearchComponent } from './search/search.component';
 import { SearchResultListComponent } from './search-result-list/search-result-list.component';
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatExpansionModule,
     NgMatSearchBarModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     CloudinaryModule.forRoot(cloudinary, cloudinaryConfig),

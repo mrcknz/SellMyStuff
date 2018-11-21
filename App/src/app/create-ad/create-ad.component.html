@@ -1,23 +1,44 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="back">
+    <i class="fas fa-chevron-left" routerLink="/" routerLinkActive="active"></i>
+  </div>
   <mat-vertical-stepper [linear]="false" #stepper>
+    <div>
+      <i
+        class="fas fa-chevron-left"
+        routerLink="/"
+        routerLinkActive="active"
+      ></i>
+    </div>
     <mat-step [stepControl]="item">
       <ng-template matStepLabel>Item Details</ng-template>
       <mat-form-field>
         <input formControlName="title" matInput placeholder="Title" required />
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="description"
+          required
+        ></textarea>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Price €" formControlName="price" type="number" required />
+        <input
+          matInput
+          placeholder="Price €"
+          formControlName="price"
+          type="number"
+          required
+        />
       </mat-form-field>
-      <div>
-        <button mat-button matStepperNext type="button">Next</button>
-      </div>
+      <div><button mat-button matStepperNext type="button">Next</button></div>
     </mat-step>
     <mat-step [stepControl]="pictures">
-      <ng-template matStepLabel>Picture</ng-template>
-      <app-picture-upload (uploaded)="onImageUpload($event)"></app-picture-upload>
+      <ng-template matStepLabel>Pictures</ng-template>
+      <app-picture-upload
+        (uploaded)="onImageUpload($event)"
+      ></app-picture-upload>
       <div>
         <button mat-button matStepperPrevious type="button">Back</button>
         <button mat-button matStepperNext type="button">Next</button>
@@ -58,7 +79,7 @@
         <mat-hint>in cm</mat-hint>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperPrevious>Back</button>
         <button mat-button type="submit">Submit</button>
       </div>
     </mat-step>

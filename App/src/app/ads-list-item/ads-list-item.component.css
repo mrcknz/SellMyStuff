@@ -1,6 +1,12 @@
 .mat-card,
 .ad-card {
   max-width: 400px;
+  /* background-color: #fafafa; */
+  background-color: #d4e3ce;
+}
+
+.mat-card-title {
+  color: #464646;
 }
 
 .avatar {
@@ -11,4 +17,7 @@
 .mat-card-header {
   align-items: center;
   padding: 5px;
+}
+.mat-button .details {
+  justify-self: center;
 }

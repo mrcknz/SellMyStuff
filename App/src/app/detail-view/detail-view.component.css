@@ -1,8 +1,46 @@
 i {
-  margin-left: 15px;
+  margin-left: 10px;
+  font-size: 20px;
+  color: grey;
+  /* margin: 20px; */
 }
 
 .detail-view {
   display: flex;
   flex-direction: column;
+  /* margin-bottom: 20px; */
+}
+
+.buttons {
+  margin: 10px;
+  padding: 10px;
+}
+.mat-card-title,
+h4 {
+  color: #464646;
+}
+
+.mat-expansion-panel-header {
+  padding: 10px;
+  margin: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #464646;
+}
+
+.mat-expansion-panel-header-title {
+  font-size: 18px;
+}
+
+.contact {
+  width: 100%;
+}
+
+.mat-expansion-panel,
+.mat-accordion,
+.mat-expansion-panel-header,
+.mat-card {
+  background-color: #d4e3ce;
 }

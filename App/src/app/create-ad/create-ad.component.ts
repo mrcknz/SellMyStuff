@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators
+} from '@angular/forms';
 import { ConfigService } from '../config.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ad',
   templateUrl: './create-ad.component.html',
-  styleUrls: [
-    './create-ad.component.css'
-  ]
+  styleUrls: ['./create-ad.component.css']
 })
 export class CreateAdComponent implements OnInit {
-  constructor(private service: ConfigService) {}
+  constructor(private service: ConfigService, private router: Router) {}
 
   form: FormGroup;
   pictureURL: string;
@@ -38,7 +42,10 @@ export class CreateAdComponent implements OnInit {
 
   onSubmit() {
     if (this.form.status === 'VALID') {
-      this.service.postAds({ ...this.form.value, pictureURL: this.pictureURL }).subscribe();
+      this.service
+        .postAds({ ...this.form.value, pictureURL: this.pictureURL })
+        .subscribe();
+      this.router.navigateByUrl('/');
     }
   }
 

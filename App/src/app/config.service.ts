@@ -67,10 +67,12 @@ export class ConfigService {
   // }
 
   getCountryCode(country): Observable<any> {
-    return Observable.create((observer) => {
-      this.http.get(`https://restcountries.eu/rest/v2/name/${country}`).subscribe((res) => {
-        observer.next(res[0].alpha3Code);
-      });
+    return Observable.create(observer => {
+      this.http
+        .get(`https://restcountries.eu/rest/v2/name/${country}`)
+        .subscribe(res => {
+          observer.next(res[0].alpha3Code);
+        });
     });
   }
 
@@ -183,7 +185,8 @@ export class ConfigService {
     }
 
     navigator.geolocation.getCurrentPosition(
-      (data) => {
+      data => {
+        console.log('lat', this.pos.lat);
         this.pos.lat = data.coords.latitude;
         this.pos.lon = data.coords.longitude;
       },
@@ -194,19 +197,20 @@ export class ConfigService {
   }
 
   getAddress(): Observable<any> {
-    return Observable.create((observer) => {
+    return Observable.create(observer => {
       navigator.geolocation.getCurrentPosition(
-        (data) => {
+        data => {
           this.http
             .get<Address>(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${data.coords.latitude}&lon=${data.coords
-                .longitude}`
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${
+                data.coords.latitude
+              }&lon=${data.coords.longitude}`
             )
-            .subscribe((res) => {
+            .subscribe(res => {
               observer.next(res);
             });
         },
-        (error) => {
+        error => {
           observer.error(error);
         }
       );
@@ -303,8 +307,8 @@ export class ConfigService {
   getShipments(addData, buyerLocation): Observable<any> {
     console.log('weight', typeof addData.weight);
 
-    return Observable.create((observer) => {
-      this.getAddress().subscribe((addressData) => {
+    return Observable.create(observer => {
+      this.getAddress().subscribe(addressData => {
         // this.http
         //   .get(`https://restcountries.eu/rest/v2/name/${buyerLocation.country}`)
         //   .subscribe(countryData => {
@@ -378,7 +382,7 @@ export class ConfigService {
               })
             }
           )
-          .subscribe((data) => observer.next(data));
+          .subscribe(data => observer.next(data));
         // );
       });
     });

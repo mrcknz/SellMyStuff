@@ -7,6 +7,15 @@ mat-form-field {
   width: 100%;
 }
 
-.create-container>* {
+.create-container > * {
   width: 100%;
+}
+
+i {
+  margin: 15px;
+}
+
+.detail-view {
+  display: flex;
+  flex-direction: column;
 }

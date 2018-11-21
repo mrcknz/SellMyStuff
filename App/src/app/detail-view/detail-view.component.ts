@@ -3,15 +3,19 @@ import { ConfigService } from '../config.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Ad } from '../ad';
+import { ViewChild } from '@angular/core';
+import {} from '@types/googlemaps';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
-  styleUrls: [
-    './detail-view.component.css'
-  ]
+  styleUrls: ['./detail-view.component.css']
 })
 export class DetailViewComponent implements OnInit {
+  loading = true;
+  public displaySpinner: boolean;
+  private spinnerService: Ng4LoadingSpinnerService;
   step = 0;
   public id;
   ad: Ad;
@@ -19,6 +23,8 @@ export class DetailViewComponent implements OnInit {
   // private ad;
   private buyerLocation;
   public quoteData = null;
+  @ViewChild('gmap') gmapElement: any;
+  map: google.maps.Map;
 
   profileForm = new FormGroup({
     address: new FormGroup({
@@ -35,14 +41,13 @@ export class DetailViewComponent implements OnInit {
   }
 
   nextStep() {
-    this.step++;
+    console.log('sfasfsfasdfssdf');
+    this.displaySpinner = true;
   }
 
   onSubmit() {
     this.buyerLocation = this.profileForm.value.address;
-    console.log('ad', this.ad);
-    this._dataService.getCountryCode(this.ad.country).subscribe((countryCode) => {
-      console.log('countrycode', countryCode);
+    this._dataService.getCountryCode(this.ad.country).subscribe(countryCode => {
       this._dataService
         .getShipments(
           {
@@ -64,25 +69,42 @@ export class DetailViewComponent implements OnInit {
             // house_number: this.profileForm.value.address.house_number
           }
         )
-        .subscribe((quoteData) => {
-          console.log('quote', quoteData);
+        .subscribe(quoteData => {
           this.quoteData = quoteData;
+          this.displaySpinner = false;
         });
     });
   }
 
-  constructor(private route: ActivatedRoute, private _dataService: ConfigService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _dataService: ConfigService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getAd();
+
+    const mapProp = {
+      center: new google.maps.LatLng(41.3851, 2.1734),
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
+      zoomControl: true
+    };
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    const marker = new google.maps.Marker({ position: mapProp.center });
+    marker.setMap(this.map);
   }
 
   getAd() {
-    this._dataService.getAd(this.id).subscribe((data) => {
+    this._dataService.getAd(this.id).subscribe(data => {
       this.ad = data;
-      this._dataService.getAddress().subscribe((addressData) => {
+      this._dataService.getAddress().subscribe(addressData => {
         this.buyerLocation = addressData.address;
+        console.log('address', this.buyerLocation);
+        console.log('coords', addressData);
         this.profileForm.patchValue({
           address: {
             // road: addressData.address.road,
@@ -103,9 +125,7 @@ export class DetailViewComponent implements OnInit {
 
   deleteAd() {
     this._dataService.deleteAd(this.id);
-    this.router.navigate([
-      '/'
-    ]);
+    this.router.navigate(['/']);
   }
 
   //   this._dataService.getAddress().subscribe((addressData) => {
