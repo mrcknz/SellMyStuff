@@ -5,6 +5,7 @@
 
 mat-form-field {
   width: 100%;
+  background-color: #d4e3ce;
 }
 
 .create-container > * {
@@ -18,4 +19,8 @@ i {
 .detail-view {
   display: flex;
   flex-direction: column;
+}
+
+.vertical {
+  background-color: #d4e3ce;
 }

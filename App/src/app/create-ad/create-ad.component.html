@@ -1,8 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="back">
     <i class="fas fa-chevron-left" routerLink="/" routerLinkActive="active"></i>
   </div>
-  <mat-vertical-stepper [linear]="false" #stepper>
+  <mat-vertical-stepper class="vertical" [linear]="false" #stepper>
     <div>
       <i
         class="fas fa-chevron-left"

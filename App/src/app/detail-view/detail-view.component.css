@@ -44,3 +44,8 @@ p {
 .mat-card {
   background-color: #d4e3ce;
 }
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  color: #93c47d;
+}
