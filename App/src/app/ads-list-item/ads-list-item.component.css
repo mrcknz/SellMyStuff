@@ -1,7 +1,8 @@
 .mat-card,
 .ad-card {
   max-width: 400px;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
+  background-color: #d4e3ce;
 }
 
 .mat-card-title {
