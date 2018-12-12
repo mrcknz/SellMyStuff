@@ -1,27 +1,35 @@
-# App
+> This project was part of the curriculum at [codeworks](https://codeworks.me). As a legacy project it was meant as practice working on an unfamiliar codebase (forked from a fellow students repo). The primary goals were to make the app stable and implement a more contemporary UI.
+---
+_**Wallapop with shipping estimates.** Pistchio allows you to get a quote for the shipment of the thing that you're intersted in so that you get a transparent and accurate idea of the total cost involved in obtaining it._
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
+## Showcase
+[screenshots to be added]
 
-## Development server
+## Instructions
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+# clone repo to your computer
+git clone https://github.com/mrcknz/pistachio.git
 
-## Code scaffolding
+# change to server directory
+cd pistachio/server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# install server dependencies
+npm install
 
-## Build
+# run server
+npm run dev
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# change to app directory
+cd ../App
 
-## Running unit tests
+# install dependencies
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# run app
+npm start
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Developers
+* [Charlie Rutland](https://github.com/charlierutland) [[linkedin](https://www.linkedin.com/in/charlie-rutland-9777761b)]
+* [Marco Kunz](https://github.com/mrcknz) [[linkedin](https://www.linkedin.com/in/marcokunz/)]
